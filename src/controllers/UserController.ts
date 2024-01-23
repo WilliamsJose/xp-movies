@@ -50,7 +50,7 @@ export class UserController {
 
       await userFavoriteRepository.save(newFavorite)
 
-      return res.status(200).json({ message: 'Favorite added successfully!' })
+      return res.status(200).json(newFavorite)
 
     } catch (error: any) {
       return res.status(500).json({ message: error.detail })
