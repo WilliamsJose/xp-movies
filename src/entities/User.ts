@@ -12,7 +12,7 @@ export class User {
   @Column({ type: 'text' })
   name: string
   
-  @Column({ type: 'text' })
+  @Column({ type: 'text', unique: true })
   email: string
   
   @Column()
