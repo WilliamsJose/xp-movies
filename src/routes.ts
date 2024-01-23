@@ -4,6 +4,6 @@ import { UserController } from "./controllers/UserController";
 const routes = Router()
 
 routes.post('/user', new UserController().create)
-routes.post('/:userId/addFavorite', new UserController().addFavorite)
+routes.post('/user/:userId/addFavorite', new UserController().addFavorite)
 
 export default routes;
