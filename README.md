@@ -2,6 +2,11 @@
 
 Express api for saving favorites movies
 
+## Database diagram
+
+![Database](./xp-movie-CURRENT.webp)
+
+
 ## API Reference
 
 ### Create new user
@@ -69,4 +74,11 @@ Header:
   Authorization = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
+---
 
+TODO:
+  - [ ] swagger docs
+  - [ ] redis cache
+  - [ ] kubernetes pods
+  - [ ] lambda crons
+  - [ ] free and paid user features
