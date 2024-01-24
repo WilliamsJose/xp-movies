@@ -1,5 +1,6 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { UserFavorite } from "./UserFavotire";
+import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { UserFavorite } from "./UserFavorite";
+import { UserToken } from "./UserToken";
 
 @Entity('users')
 export class User {
@@ -20,4 +21,7 @@ export class User {
 
   @OneToMany(() => UserFavorite, favorite => favorite.user)
   favorites: UserFavorite[]
+
+  @OneToOne(() => UserToken, token => token.id)
+  token: UserToken
 }

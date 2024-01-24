@@ -1,5 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./User";
+import { Movie } from "./Movie";
 
 @Entity('user_favorites')
 export class UserFavorite {
@@ -21,4 +22,8 @@ export class UserFavorite {
   @ManyToOne(() => User, user => user.favorites)
   @JoinColumn({ name: 'user_id' })
   user: User
+
+  @ManyToOne(() => Movie, movie => movie.favorites)
+  @JoinColumn({ name: 'movie_id' })
+  movie: Movie
 }
