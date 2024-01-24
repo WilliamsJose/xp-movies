@@ -1,8 +1,9 @@
 import { Request, Response } from "express"
 import { userRepository } from "../repositories/userRepository"
 import { userFavoriteRepository } from "../repositories/userFavoriteRepository"
-import bcrypt from "bcrypt"
 import { validate } from "email-validator";
+import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
 
 function isEmpty(...args: any[]) {
   args.forEach((element: any) => {
@@ -33,6 +34,7 @@ export class UserController {
       })
 
       await userRepository.save(newUser)
+
       return res.status(201).json({ newUser })
     } catch (error: any) {
       if (error.code === '23505') {
@@ -43,7 +45,7 @@ export class UserController {
   }
 
   async addFavorite(req: Request, res: Response) {
-    const { userId } = req.params
+    const { userId } = req.body
     const { imdbId, category, movieName } = req.body
 
     try {
@@ -74,14 +76,14 @@ export class UserController {
   }  
 
   async findAllUserFavorites(req: Request, res: Response) {
-    const { userId } = req.params
+    const { userId } = req.body
 
     try {
       const userFavorites = await userFavoriteRepository.findBy({ user: {
         id: Number(userId)
       } })
 
-      res.status(200).json({ userFavorites })
+      res.status(200).json({ userId, userFavorites })
 
     } catch (error: any) {
       return res.status(500).json({ message: error.detail })
@@ -98,7 +100,11 @@ export class UserController {
       const successLogin = await bcrypt.compare(password, userFound.password)
 
       if (successLogin) {
-        return res.status(200).json({ message: 'User Logged' })
+        const token = jwt.sign({ id: userFound.id }, process.env.JWT_SECRET || "", {
+          expiresIn: process.env.JWT_EXPIRES_IN,
+        });
+
+        return res.status(200).json({ message: 'User Logged', token })
       } else {
         return res.status(400).json({ message: 'Wrong Email or Password' })
       }
