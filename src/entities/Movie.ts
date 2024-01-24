@@ -19,7 +19,4 @@ export class Movie {
   @ManyToOne(() => Category, category => category.movie)
   @JoinColumn({ name: 'category_id' })
   categories: Category[]
-
-  @OneToMany(() => UserFavorite, favorite => favorite.movie)
-  favorites: UserFavorite[]
 }
