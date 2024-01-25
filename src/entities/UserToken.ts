@@ -6,14 +6,14 @@ export class UserToken {
   @PrimaryGeneratedColumn()
   id: number
   
-  @Column({ type: 'timestamp with time zone', default: 'now()' })
-  created_at: Date
+  @Column({ name: 'created_at', type: 'timestamp with time zone', default: 'NOW()' })
+  createdAt: Date
 
-  @Column({ type: 'timestamp with time zone', default: 'now()', onUpdate: 'now()' })
-  updated_at: Date
+  @Column({ name: 'updated_at', type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP'})
+  updatedAt: Date
   
-  @Column()
-  refresh_token: string
+  @Column({ name: 'refresh_token' })
+  refreshToken: string
   
   @OneToOne(() => User, user => user.token)
   @JoinColumn({ name: 'user_id' })

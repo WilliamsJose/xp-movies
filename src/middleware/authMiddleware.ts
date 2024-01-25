@@ -35,7 +35,7 @@ export async function refreshToken(req: Request, res: Response) {
     const decodedUserToken: any = jwt.verify(String(refreshToken), process.env.JWT_SECRET || "")
 
     // token exists on database?
-    await userTokenRepository.findOneByOrFail({ refresh_token: String(refreshToken) })
+    await userTokenRepository.findOneByOrFail({ refreshToken: String(refreshToken) })
 
     const newAccessToken = jwt.sign({ id: decodedUserToken.id }, process.env.JWT_SECRET || "", {
       expiresIn: process.env.JWT_ACCESS_EXPIRES_IN,

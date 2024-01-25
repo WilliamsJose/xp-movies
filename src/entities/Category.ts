@@ -6,11 +6,11 @@ export class Category {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column({ type: 'timestamp with time zone', default: 'now()' })
-  created_at: Date
+  @Column({ name: 'created_at', type: 'timestamp with time zone', default: 'NOW()' })
+  createdAt: Date
 
-  @Column({ type: 'timestamp with time zone', default: 'now()', onUpdate: 'now()' })
-  updated_at: Date
+  @Column({ name: 'updated_at', type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP'})
+  updatedAt: Date
   
   @Column({ type: 'text' })
   title: string

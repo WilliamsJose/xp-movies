@@ -62,11 +62,11 @@ export class UserController {
         return res.status(400).json({ message: 'You must provide an imdbId, categoryId and title.' })
       }
 
-      let movie = await movieRepository.findOneBy({ imdb_id: imdbId })
+      let movie = await movieRepository.findOneBy({ imdbId })
       const categoryExists = await categoryRepository.findOneByOrFail({ id: categoryId })
 
       if (!movie) {
-        movie = movieRepository.create({ imdb_id: imdbId, title, movieCategory: [categoryExists] })
+        movie = movieRepository.create({ imdbId, title, movieCategory: [categoryExists] })
         await movieRepository.save(movie)
       }
 
@@ -117,9 +117,9 @@ export class UserController {
         const refreshTokenFound = await userTokenRepository.findOneBy({ user: { id: userFound.id } })
 
         if (refreshTokenFound) {
-          userTokenRepository.update({ user: {id: userFound.id }}, { refresh_token: refreshToken })
+          userTokenRepository.update({ user: {id: userFound.id }}, { refreshToken })
         } else {
-          const newUserToken = userTokenRepository.create({ refresh_token: refreshToken, user: userFound })
+          const newUserToken = userTokenRepository.create({ refreshToken, user: userFound })
           userTokenRepository.save(newUserToken)
         }
 

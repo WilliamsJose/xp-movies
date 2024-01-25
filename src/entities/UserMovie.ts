@@ -7,11 +7,11 @@ export class UserMovie {
   @PrimaryGeneratedColumn()
   id: number
   
-  @Column({ type: 'timestamp with time zone', default: 'now()' })
-  created_at: Date
-  
-  @Column({ type: 'timestamp with time zone', default: 'now()', onUpdate: 'now()' })
-  updated_at: Date
+  @Column({ name: 'created_at', type: 'timestamp with time zone', default: 'NOW()' })
+  createdAt: Date
+
+  @Column({ name: 'updated_at', type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP'})
+  updatedAt: Date
   
   @ManyToOne(() => User, user => user.movie)
   @JoinColumn({ name: 'user_id' })
