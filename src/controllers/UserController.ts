@@ -5,6 +5,8 @@ import { validate } from "email-validator";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import { userTokenRepository } from "../repositories/userTokenRepository";
+import { movieRepository } from "../repositories/movieRepository";
+import { categoryRepository } from "../repositories/categoryRepository";
 
 function isEmpty(...args: any[]) {
   args.forEach((element: any) => {
@@ -46,8 +48,8 @@ export class UserController {
   }
 
   async addFavorite(req: Request, res: Response) {
-    const { userId } = req.body
-    const { imdbId, category, movieName } = req.body
+    const { userId } = req
+    const { imdbId, categoryId, title } = req.body
 
     try {
       const user = await userRepository.findOneBy({ id: Number(userId) })
@@ -56,23 +58,26 @@ export class UserController {
       if (!user) {
         return res.status(404).json({ message: 'You must be registered to add an favorite.' })
       }
-      if (!imdbId || !category || !movieName) {
-        return res.status(400).json({ message: 'You must provide an imdbId, category and movieName.' })
+      if (!imdbId || !categoryId || !title) {
+        return res.status(400).json({ message: 'You must provide an imdbId, categoryId and title.' })
       }
 
-      const newFavorite = userFavoriteRepository.create({
-        category,
-        user,
-        movie_name: movieName,
-        imdb_id: imdbId,
-      })
+      let movie = await movieRepository.findOneBy({ imdb_id: imdbId })
+      const categoryExists = await categoryRepository.findOneByOrFail({ id: categoryId })
 
-      await userFavoriteRepository.save(newFavorite)
+      if (!movie) {
+        movie = movieRepository.create({ imdb_id: imdbId, title, movieCategory: [categoryExists] })
+        await movieRepository.save(movie)
+      }
 
-      return res.status(200).json(newFavorite)
+      const newFavoriteMovie = userMovieRepository.create({ movie, user })
 
+      await userMovieRepository.save(newFavoriteMovie)
+
+      return res.status(200).json({ message: 'New favorite movie added!' })
     } catch (error: any) {
-      return res.status(500).json({ message: error.detail })
+      // TODO treat better and not return everything
+      return res.status(500).json({ message: error })
     }
   }  
 
