@@ -4,6 +4,7 @@ import { userFavoriteRepository } from "../repositories/userFavoriteRepository"
 import { validate } from "email-validator";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+import { userTokenRepository } from "../repositories/userTokenRepository";
 
 function isEmpty(...args: any[]) {
   args.forEach((element: any) => {
