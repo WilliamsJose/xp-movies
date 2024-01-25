@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { userRepository } from "../repositories/userRepository"
-import { userFavoriteRepository } from "../repositories/userFavoriteRepository"
+import { userMovieRepository } from "../repositories/userMovieRepository"
 import { validate } from "email-validator";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
@@ -77,10 +77,10 @@ export class UserController {
   }  
 
   async findAllUserFavorites(req: Request, res: Response) {
-    const { userId } = req.body
+    const { userId } = req
 
     try {
-      const userFavorites = await userFavoriteRepository.findBy({ user: {
+      const userFavorites = await userMovieRepository.findBy({ user: {
         id: Number(userId)
       } })
 
