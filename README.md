@@ -82,3 +82,5 @@ TODO:
   - [ ] kubernetes pods
   - [ ] lambda crons
   - [ ] free and paid user features
+  - [ ] GraphQL 
+  - [ ] WebSocket

@@ -104,8 +104,22 @@ export class UserController {
           expiresIn: process.env.JWT_ACCESS_EXPIRES_IN,
         });
 
+        const refreshToken = jwt.sign({ id: userFound.id }, process.env.JWT_SECRET || "", {
+          expiresIn: process.env.JWT_REFRESH_EXPIRES_IN,
+        });
+
+        const refreshTokenFound = await userTokenRepository.findOneBy({ user: { id: userFound.id } })
+
+        if (refreshTokenFound) {
+          userTokenRepository.update({ user: {id: userFound.id }}, { refresh_token: refreshToken })
+        } else {
+          const newUserToken = userTokenRepository.create({ refresh_token: refreshToken, user: userFound })
+          userTokenRepository.save(newUserToken)
+        }
+
         return res
-          .cookie('accessToken', accessToken)
+          .header('Authorization', accessToken)
+          .header('refreshToken', refreshToken)
           .status(200)
           .json({ message: 'Sign in Successfully!' })
       } else {
