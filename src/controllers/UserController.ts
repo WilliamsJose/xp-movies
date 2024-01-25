@@ -15,7 +15,7 @@ function isEmpty(...args: any[]) {
 }
 
 export class UserController {
-  async create(req: Request, res: Response) {
+  async register(req: Request, res: Response) {
     const { name, email, password } = req.body
     
     if (!name || !email || !password) {

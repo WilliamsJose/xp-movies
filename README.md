@@ -12,7 +12,7 @@ Express api for saving favorites movies
 ### Create new user
 
 ```http
-  POST /user
+  POST /register
 ```
 
 Body:
