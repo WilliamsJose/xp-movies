@@ -8,7 +8,7 @@ export class Movie {
   id: number
 
   @Column()
-  imdb_id: number
+  imdb_id: string
   
   @Column({ type: 'timestamp with time zone', default: 'now()' })
   created_at: Date
