@@ -1,14 +1,17 @@
 import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { UserFavorite } from "./UserFavorite";
+import { UserMovie } from "./UserMovie";
 import { UserToken } from "./UserToken";
 
-@Entity('users')
+@Entity('user')
 export class User {
   @PrimaryGeneratedColumn()
   id: number
   
   @Column({ type: 'timestamp with time zone', default: 'now()' })
-  date_modified: Date
+  created_at: Date
+
+  @Column({ type: 'timestamp with time zone', default: 'now()', onUpdate: 'now()' })
+  updated_at: Date
   
   @Column({ type: 'text' })
   name: string
@@ -19,9 +22,9 @@ export class User {
   @Column()
   password: string
 
-  @OneToMany(() => UserFavorite, favorite => favorite.user)
-  favorites: UserFavorite[]
+  @OneToMany(() => UserMovie, movie => movie.user)
+  movie: UserMovie[]
 
-  @OneToOne(() => UserToken, token => token.id)
+  @OneToOne(() => UserToken, token => token.user)
   token: UserToken
 }

@@ -1,14 +1,20 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Movie } from "./Movie";
+import { MovieCategory } from "./MovieCategory";
 
-@Entity('categories')
+@Entity('category')
 export class Category {
   @PrimaryGeneratedColumn()
   id: number
+
+  @Column({ type: 'timestamp with time zone', default: 'now()' })
+  created_at: Date
+
+  @Column({ type: 'timestamp with time zone', default: 'now()', onUpdate: 'now()' })
+  updated_at: Date
   
   @Column({ type: 'text' })
   title: string
   
-  @OneToMany(() => Movie, movie => movie.categories)
-  movie: Movie
+  @OneToMany(() => MovieCategory, movieCategory => movieCategory.category)
+  movieCategory: MovieCategory[]
 }
