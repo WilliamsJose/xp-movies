@@ -100,11 +100,14 @@ export class UserController {
       const successLogin = await bcrypt.compare(password, userFound.password)
 
       if (successLogin) {
-        const token = jwt.sign({ id: userFound.id }, process.env.JWT_SECRET || "", {
-          expiresIn: process.env.JWT_EXPIRES_IN,
+        const accessToken = jwt.sign({ id: userFound.id }, process.env.JWT_SECRET || "", {
+          expiresIn: process.env.JWT_ACCESS_EXPIRES_IN,
         });
 
-        return res.status(200).json({ message: 'User Logged', token })
+        return res
+          .cookie('accessToken', accessToken)
+          .status(200)
+          .json({ message: 'Sign in Successfully!' })
       } else {
         return res.status(400).json({ message: 'Wrong Email or Password' })
       }
