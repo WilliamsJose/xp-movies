@@ -7,47 +7,7 @@ import jwt from "jsonwebtoken"
 import { userTokenRepository } from "../repositories/userTokenRepository";
 import { movieRepository } from "../repositories/movieRepository";
 import { categoryRepository } from "../repositories/categoryRepository";
-
-function isEmpty(...args: any[]) {
-  args.forEach((element: any) => {
-    if (String(element).trim() === '' ) {
-      return true
-    }
-  });
-  return false
-}
-
-export class UserController {
-  async register(req: Request, res: Response) {
-    const { name, email, password } = req.body
-    
-    if (!name || !email || !password) {
-      return res.status(400).json({ message: 'You must provide a name, email and password.' })
-    }
-
-    if (!validate(email)) {
-      return res.status(400).json({ message: 'Email is not valid' })
-    }
-
-    try {
-      const encryptedPass = await bcrypt.hash(password, 10)
-
-      const newUser = userRepository.create({
-        name, email, password: encryptedPass
-      })
-
-      await userRepository.save(newUser)
-
-      return res.status(201).json({ newUser })
-    } catch (error: any) {
-      if (error.code === '23505') {
-        return res.status(409).json({ message: `Email: ${email} already registered!` })
-      }
-      return res.status(500).json({ message: error.detail })
-    }
-  }
-
-  async addFavorite(req: Request, res: Response) {
+  async addFavorite(req: Request, res: Response): Promise<Response> {
     const { userId } = req
     const { imdbId, categoryId, title } = req.body
 
@@ -81,7 +41,7 @@ export class UserController {
     }
   }  
 
-  async findAllUserFavorites(req: Request, res: Response) {
+  async getAllFavorites(req: Request, res: Response): Promise<Response> {
     const { userId } = req
 
     try {
@@ -89,8 +49,7 @@ export class UserController {
         id: Number(userId)
       } })
 
-      res.status(200).json({ userId, userFavorites })
-
+      return res.status(200).json({ userId, userFavorites })
     } catch (error: any) {
       return res.status(500).json({ message: error.detail })
     }
