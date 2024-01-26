@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { User } from "./User";
 import { Movie } from "./Movie";
 
@@ -7,17 +7,17 @@ export class UserMovie {
   @PrimaryGeneratedColumn()
   id: number
   
-  @Column({ name: 'created_at', type: 'timestamp with time zone', default: 'NOW()' })
+  @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP'})
   createdAt: Date
 
-  @Column({ name: 'updated_at', type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP'})
+  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP'})
   updatedAt: Date
   
   @ManyToOne(() => User, user => user.movie)
-  @JoinColumn({ name: 'user_id' })
+  @JoinColumn({ name: 'user_id', foreignKeyConstraintName: 'fk_usermovie_user' })
   user: User
 
   @ManyToOne(() => Movie, movie => movie.userMovies)
-  @JoinColumn({ name: 'movie_id' })
+  @JoinColumn({ name: 'movie_id', foreignKeyConstraintName: 'fk_usermovie_movie' })
   movie: Movie
 }

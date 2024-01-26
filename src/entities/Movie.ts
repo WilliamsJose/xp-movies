@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { UserMovie } from "./UserMovie";
 import { MovieCategory } from "./MovieCategory";
 
@@ -10,10 +10,10 @@ export class Movie {
   @Column({ name: 'imdb_id' })
   imdbId: string
   
-  @Column({ name: 'created_at', type: 'timestamp with time zone', default: 'NOW()' })
+  @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP'})
   createdAt: Date
 
-  @Column({ name: 'updated_at', type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP'})
+  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP'})
   updatedAt: Date
   
   @Column({ type: 'text' })

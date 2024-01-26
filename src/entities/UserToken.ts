@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { User } from "./User";
 
 @Entity('user_token')
@@ -6,16 +6,16 @@ export class UserToken {
   @PrimaryGeneratedColumn()
   id: number
   
-  @Column({ name: 'created_at', type: 'timestamp with time zone', default: 'NOW()' })
+  @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP'})
   createdAt: Date
 
-  @Column({ name: 'updated_at', type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP'})
+  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP'})
   updatedAt: Date
   
   @Column({ name: 'refresh_token' })
   refreshToken: string
   
   @OneToOne(() => User, user => user.token)
-  @JoinColumn({ name: 'user_id' })
+  @JoinColumn({ name: 'user_id', foreignKeyConstraintName: 'fk_usertoken_user' })
   user: User
 }

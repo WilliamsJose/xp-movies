@@ -1,3 +1,6 @@
+# Database
+migrations/
+
 # Logs
 logs
 *.log
