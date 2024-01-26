@@ -57,8 +57,8 @@ Body:
 ```json
   {
     "imdbId": string,
-    "category": string,
-    "movieName": string
+    "categoryId": string,
+    "title": string
   }
 ```
 
@@ -72,6 +72,18 @@ Header:
 
 ```json
   Authorization = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+
+### Refresh access token
+
+```http
+  GET /refreshToken
+```
+
+Header:
+
+```json
+  refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
 ---
