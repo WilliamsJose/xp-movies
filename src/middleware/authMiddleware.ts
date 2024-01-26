@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken"
 import { Request, Response, NextFunction } from "express"
 import { userTokenRepository } from "../repositories/userTokenRepository";
+import { ApiResponse } from "../enums/ApiResponse";
 
 declare module 'express' {
   interface Request {
@@ -8,41 +9,41 @@ declare module 'express' {
   }
 }
 
-export async function verifyToken(req: Request, res: Response, next: NextFunction) {
+export async function verifyToken(req: Request, res: Response, next: NextFunction): Promise<Response | undefined> {
   const token = req.header('Authorization')
   if (!token) {
-    return res.status(401).json({ message: 'Access denied' })
+    return res.status(ApiResponse.Unauthorized).json({ message: 'Access denied' })
   }
   try {
     const decodedToken: any = jwt.verify(token, process.env.JWT_SECRET || "")
     req['userId'] = decodedToken.id
     next()
   } catch (error) {
-    res.status(401).json({ message: 'Invalid token' })
+    res.status(ApiResponse.Unauthorized).json({ message: 'Invalid token' })
   }
 }
 
-export async function refreshToken(req: Request, res: Response) {
+export async function refreshToken(req: Request, res: Response): Promise<Response | undefined>  {
   const refreshToken = req.headers['refreshtoken']
 
   try {
     
     if (!refreshToken) {
-      return res.status(403).json({ message: 'No refresh token provided.' })  
+      return res.status(ApiResponse.BadRequest).json({ message: 'No refresh token provided.' })  
     }
 
     // is token valid?
     const decodedUserToken: any = jwt.verify(String(refreshToken), process.env.JWT_SECRET || "")
 
     // token exists on database?
-    await userTokenRepository.findOneByOrFail({ refreshToken: String(refreshToken) })
+    await userTokenRepository.getByRefreshToken(refreshToken.toString())
 
     const newAccessToken = jwt.sign({ id: decodedUserToken.id }, process.env.JWT_SECRET || "", {
       expiresIn: process.env.JWT_ACCESS_EXPIRES_IN,
     });
 
-    return res.status(200).header('Authorization', newAccessToken).json({ message: 'New access token generated' })
+    return res.status(ApiResponse.OK).header('Authorization', newAccessToken).json({ message: 'New access token generated' })
   } catch (error: any) {
-    return res.status(500).json({ message: error.detail })
+    return res.status(ApiResponse.InternalServerError).json({ message: error.detail })
   }
 }

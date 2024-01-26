@@ -29,13 +29,12 @@ export class AuthController implements IAuthController {
           expiresIn: process.env.JWT_REFRESH_EXPIRES_IN,
         });
 
-        const refreshTokenFound = await userTokenRepository.findOneBy({ user: { id: userFound.id } })
+        const refreshTokenFound = await userTokenRepository.getByUserId(userFound.id)
 
         if (refreshTokenFound) {
-          userTokenRepository.update({ user: {id: userFound.id }}, { refreshToken })
+          await userTokenRepository.update(userFound.id, refreshToken)
         } else {
-          const newUserToken = userTokenRepository.create({ refreshToken, user: userFound })
-          userTokenRepository.save(newUserToken)
+          await userTokenRepository.save(refreshToken, userFound)
         }
 
         const headers = {
