@@ -3,7 +3,7 @@ import { userRepository } from "../repositories/userRepository"
 import { userMovieRepository } from "../repositories/userMovieRepository"
 import { movieRepository } from "../repositories/movieRepository";
 import { categoryRepository } from "../repositories/categoryRepository";
-import { IUserController } from "../interfaces/IUserController";
+import { IUserController } from "../interfaces/controllers/IUserController";
 
 export class UserController implements IUserController {
   async addFavorite(req: Request, res: Response): Promise<Response> {

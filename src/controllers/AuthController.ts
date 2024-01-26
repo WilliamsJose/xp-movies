@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { IAuthController } from "../interfaces/IAuthController"
+import { IAuthController } from "../interfaces/controllers/IAuthController"
 import { validate } from "email-validator"
 import { userRepository } from "../repositories/userRepository"
 import { userTokenRepository } from "../repositories/userTokenRepository";
