@@ -1,9 +1,10 @@
 import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { UserMovie } from "./UserMovie";
 import { UserToken } from "./UserToken";
+import { IUser } from "../interfaces/entities/IUser";
 
 @Entity('user')
-export class User {
+export class User implements IUser {
   @PrimaryGeneratedColumn()
   id: number
   
