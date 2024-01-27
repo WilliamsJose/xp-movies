@@ -1,9 +1,10 @@
 import { CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Movie } from "./Movie";
 import { Category } from "./Category";
+import { IMovieCategory } from "../interfaces/entities/IMovieCategory";
 
 @Entity('movie_category')
-export class MovieCategory {
+export class MovieCategory implements IMovieCategory {
   @PrimaryGeneratedColumn()
   id: number
   

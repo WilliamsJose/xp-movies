@@ -4,14 +4,14 @@ import { userMovieRepository } from "../repositories/userMovieRepository"
 import { movieRepository } from "../repositories/movieRepository";
 import { categoryRepository } from "../repositories/categoryRepository";
 import { IUserController } from "../interfaces/controllers/IUserController";
+import { movieCategoryRepository } from "../repositories/movieCategoryRepository";
 import { HTTPStatusCode } from "../enums/HTTPStatusCode";
 
 export class UserController implements IUserController {
   async addFavorite(req: Request, res: Response): Promise<Response> {
     const { userId } = req
-    const { imdbId, categoryId, title } = req.body
+    const { imdbId, categoriesIds, title } = req.body
 
-    
     try {
       if(!userId) throw new Error('Missing param userId')
       
@@ -21,20 +21,24 @@ export class UserController implements IUserController {
       if (!user) {
         return res.status(HTTPStatusCode.BadRequest).json({ message: 'You must be registered to add an favorite.' })
       }
-      if (!imdbId || !categoryId || !title) {
+      if (!imdbId || Array(categoriesIds).length < 1 || !title) {
         return res.status(HTTPStatusCode.BadRequest).json({ message: 'You must provide an imdbId, categoriesIds and title.' })
       }
 
-      let movie = await movieRepository.findOneBy({ imdbId })
-      const categoryExists = await categoryRepository.findOneByOrFail({ id: categoryId })
-
+      let movie = await movieRepository.getByImdb(imdbId) 
       if (!movie) {
-        movie = movieRepository.create({ imdbId, title, movieCategory: [categoryExists] })
-        await movieRepository.save(movie)
+        movie = await movieRepository.save(imdbId, title)
       }
 
-      const newFavoriteMovie = userMovieRepository.create({ movie, user })
-      await userMovieRepository.save(newFavoriteMovie)
+      const categories = await categoryRepository.getManyByIds(categoriesIds)
+      if (!categories || categories.length === 0) {
+        return res.status(HTTPStatusCode.BadRequest).json({ message: 'Invalid categories.' })
+      }
+
+      if (movie) {
+        await movieCategoryRepository.save(movie, categories) 
+        await userMovieRepository.save(user, movie)
+      }
 
       return res.status(HTTPStatusCode.OK).json({ message: 'New favorite movie added!' })
     } catch (error: any) {
@@ -47,9 +51,12 @@ export class UserController implements IUserController {
     const { userId } = req
 
     try {
-      const userFavorites = await userMovieRepository.findBy({ user: {
-        id: Number(userId)
-      } })
+
+      if (!userId) {
+        return res.status(HTTPStatusCode.BadRequest).json({ message: 'You must provide an userId' })
+      }
+
+      const userFavorites = await userMovieRepository.getByUserId(+userId)
 
       return res.status(HTTPStatusCode.OK).json({ userId, userFavorites })
     } catch (error: any) {

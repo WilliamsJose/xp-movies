@@ -1,8 +1,9 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { User } from "./User";
+import { IUserToken } from "../interfaces/entities/IUserToken";
 
 @Entity('user_token')
-export class UserToken {
+export class UserToken implements IUserToken {
   @PrimaryGeneratedColumn()
   id: number
   

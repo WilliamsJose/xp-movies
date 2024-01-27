@@ -1,9 +1,10 @@
 import { CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { User } from "./User";
 import { Movie } from "./Movie";
+import { IUserMovie } from "../interfaces/entities/IUserMovie";
 
 @Entity('user_movie')
-export class UserMovie {
+export class UserMovie  implements IUserMovie {
   @PrimaryGeneratedColumn()
   id: number
   

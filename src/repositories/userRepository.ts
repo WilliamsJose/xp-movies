@@ -12,8 +12,8 @@ class UserRepository implements IUserRepository {
   }
 
   async getById(id: number): Promise<IUser | undefined> {
-      const user = await this.repository.findOneBy({ id })
-      return user ?? undefined
+    const user = await this.repository.findOneBy({ id })
+    return user ?? undefined
   }
 
   async getByEmail(email: string): Promise<IUser | undefined> {

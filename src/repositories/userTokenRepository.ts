@@ -18,7 +18,7 @@ class UserTokenRepository implements IUserTokenRepository {
   
   async update(userId: number, refreshToken: string): Promise<number | undefined> {
     const { affected } = await this.repository.update({ user: { id: userId } }, { refreshToken })
-    return affected
+    return affected ?? undefined
   }
 
   async getByUserId(userId: number): Promise<IUserToken | undefined> {
