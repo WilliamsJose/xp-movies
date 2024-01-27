@@ -5,7 +5,7 @@ import { userRepository } from "../repositories/userRepository"
 import { userTokenRepository } from "../repositories/userTokenRepository";
 import bcrypt from 'bcrypt'
 import jwt from "jsonwebtoken"
-import { ApiResponse } from "../enums/ApiResponse";
+import { HTTPStatusCode } from "../enums/HTTPStatusCode";
 
 export class AuthController implements IAuthController {
   async login(req: Request, res: Response): Promise<Response> {
@@ -15,7 +15,7 @@ export class AuthController implements IAuthController {
       const userFound = await userRepository.getByEmail(email)
 
       if (!userFound) {
-        return res.status(ApiResponse.BadRequest).json({ message: 'Wrong Email or Password' })
+        return res.status(HTTPStatusCode.BadRequest).json({ message: 'Wrong Email or Password' })
       } 
 
       const successLogin = await bcrypt.compare(password, userFound.password)
@@ -44,13 +44,13 @@ export class AuthController implements IAuthController {
 
         return res
           .header(headers)
-          .status(ApiResponse.OK)
+          .status(HTTPStatusCode.OK)
           .json({ message: 'Sign in Successfully!' })
       } else {
-        return res.status(ApiResponse.BadRequest).json({ message: 'Wrong Email or Password' })
+        return res.status(HTTPStatusCode.BadRequest).json({ message: 'Wrong Email or Password' })
       }
     } catch (error: any) {
-      return res.status(ApiResponse.InternalServerError).json({ message: error.message })
+      return res.status(HTTPStatusCode.InternalServerError).json({ message: error.message })
     }
   }
 
@@ -58,23 +58,23 @@ export class AuthController implements IAuthController {
     const { name, email, password } = req.body
     
     if (!name || !email || !password) {
-      return res.status(ApiResponse.BadRequest).json({ message: 'You must provide a name, email and password.' })
+      return res.status(HTTPStatusCode.BadRequest).json({ message: 'You must provide a name, email and password.' })
     }
 
     if (!validate(email)) {
-      return res.status(ApiResponse.BadRequest).json({ message: 'Email is not valid' })
+      return res.status(HTTPStatusCode.BadRequest).json({ message: 'Email is not valid' })
     }
 
     try {
       const encryptedPass = await bcrypt.hash(password, 12)
       const newUser = await userRepository.save(name, email, encryptedPass)
 
-      return res.status(ApiResponse.Created).json({ newUser })
+      return res.status(HTTPStatusCode.Created).json({ newUser })
     } catch (error: any) {
       if (error.code === '23505') {
-        return res.status(ApiResponse.Conflict).json({ message: `Email: ${email} already registered!` })
+        return res.status(HTTPStatusCode.Conflict).json({ message: `Email: ${email} already registered!` })
       }
-      return res.status(ApiResponse.InternalServerError).json({ message: error.detail })
+      return res.status(HTTPStatusCode.InternalServerError).json({ message: error.detail })
     }
   }
 }

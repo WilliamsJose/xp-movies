@@ -4,6 +4,7 @@ import { userMovieRepository } from "../repositories/userMovieRepository"
 import { movieRepository } from "../repositories/movieRepository";
 import { categoryRepository } from "../repositories/categoryRepository";
 import { IUserController } from "../interfaces/controllers/IUserController";
+import { HTTPStatusCode } from "../enums/HTTPStatusCode";
 
 export class UserController implements IUserController {
   async addFavorite(req: Request, res: Response): Promise<Response> {
@@ -18,10 +19,10 @@ export class UserController implements IUserController {
 
       // TODO implement cool validators
       if (!user) {
-        return res.status(404).json({ message: 'You must be registered to add an favorite.' })
+        return res.status(HTTPStatusCode.BadRequest).json({ message: 'You must be registered to add an favorite.' })
       }
       if (!imdbId || !categoryId || !title) {
-        return res.status(400).json({ message: 'You must provide an imdbId, categoryId and title.' })
+        return res.status(HTTPStatusCode.BadRequest).json({ message: 'You must provide an imdbId, categoriesIds and title.' })
       }
 
       let movie = await movieRepository.findOneBy({ imdbId })
@@ -35,10 +36,10 @@ export class UserController implements IUserController {
       const newFavoriteMovie = userMovieRepository.create({ movie, user })
       await userMovieRepository.save(newFavoriteMovie)
 
-      return res.status(200).json({ message: 'New favorite movie added!' })
+      return res.status(HTTPStatusCode.OK).json({ message: 'New favorite movie added!' })
     } catch (error: any) {
       // TODO treat better and not return everything
-      return res.status(500).json({ message: error })
+      return res.status(HTTPStatusCode.InternalServerError).json({ message: error })
     }
   }  
 
@@ -50,9 +51,9 @@ export class UserController implements IUserController {
         id: Number(userId)
       } })
 
-      return res.status(200).json({ userId, userFavorites })
+      return res.status(HTTPStatusCode.OK).json({ userId, userFavorites })
     } catch (error: any) {
-      return res.status(500).json({ message: error.detail })
+      return res.status(HTTPStatusCode.InternalServerError).json({ message: error })
     }
   }
 }

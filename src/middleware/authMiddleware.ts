@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken"
 import { Request, Response, NextFunction } from "express"
 import { userTokenRepository } from "../repositories/userTokenRepository";
-import { ApiResponse } from "../enums/ApiResponse";
+import { HTTPStatusCode } from "../enums/HTTPStatusCode";
 
 declare module 'express' {
   interface Request {
@@ -12,14 +12,14 @@ declare module 'express' {
 export async function verifyToken(req: Request, res: Response, next: NextFunction): Promise<Response | undefined> {
   const token = req.header('Authorization')
   if (!token) {
-    return res.status(ApiResponse.Unauthorized).json({ message: 'Access denied' })
+    return res.status(HTTPStatusCode.Unauthorized).json({ message: 'Access denied' })
   }
   try {
     const decodedToken: any = jwt.verify(token, process.env.JWT_SECRET || "")
     req['userId'] = decodedToken.id
     next()
   } catch (error) {
-    res.status(ApiResponse.Unauthorized).json({ message: 'Invalid token' })
+    res.status(HTTPStatusCode.Unauthorized).json({ message: 'Invalid token' })
   }
 }
 
@@ -29,7 +29,7 @@ export async function refreshToken(req: Request, res: Response): Promise<Respons
   try {
     
     if (!refreshToken) {
-      return res.status(ApiResponse.BadRequest).json({ message: 'No refresh token provided.' })  
+      return res.status(HTTPStatusCode.BadRequest).json({ message: 'No refresh token provided.' })  
     }
 
     // is token valid?
@@ -42,8 +42,8 @@ export async function refreshToken(req: Request, res: Response): Promise<Respons
       expiresIn: process.env.JWT_ACCESS_EXPIRES_IN,
     });
 
-    return res.status(ApiResponse.OK).header('Authorization', newAccessToken).json({ message: 'New access token generated' })
+    return res.status(HTTPStatusCode.OK).header('Authorization', newAccessToken).json({ message: 'New access token generated' })
   } catch (error: any) {
-    return res.status(ApiResponse.InternalServerError).json({ message: error.detail })
+    return res.status(HTTPStatusCode.InternalServerError).json({ message: error })
   }
 }

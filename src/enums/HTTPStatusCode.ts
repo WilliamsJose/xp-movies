@@ -1,5 +1,5 @@
 
-export enum ApiResponse {
+export enum HTTPStatusCode {
   OK                  = 200,
   Created             = 201,
   BadRequest          = 400,
