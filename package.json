@@ -9,6 +9,7 @@
     "migration:run": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:run",
     "formatCode": "npx prettier src/ --write",
     "checkCode": "npx eslint src/",
+    "lint": "eslint --fix src/",
     "prepare": "husky"
   },
   "dependencies": {
