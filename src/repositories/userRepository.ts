@@ -4,7 +4,7 @@ import { User } from "../entities/User";
 import { IUser } from "../interfaces/entities/IUser";
 import { IUserRepository } from "../interfaces/repositories/IUserRepository";
 
-class UserRepository implements IUserRepository {
+export class UserRepository implements IUserRepository {
   private repository: Repository<IUser>
   
   constructor() {
@@ -32,5 +32,3 @@ class UserRepository implements IUserRepository {
     return saved ?? undefined
   }
 }
-
-export const userRepository = new UserRepository()

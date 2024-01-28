@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken"
 import { Request, Response, NextFunction } from "express"
-import { userTokenRepository } from "../repositories/userTokenRepository";
+// import { userTokenRepository } from "../repositories/userTokenRepository";
 import { HTTPStatusCode } from "../enums/HTTPStatusCode";
 
 declare module 'express' {
@@ -27,16 +27,16 @@ export async function refreshToken(req: Request, res: Response): Promise<Respons
   const refreshToken = req.headers['refreshtoken']
 
   try {
-    
+
     if (!refreshToken) {
-      return res.status(HTTPStatusCode.BadRequest).json({ message: 'No refresh token provided.' })  
+      return res.status(HTTPStatusCode.BadRequest).json({ message: 'No refresh token provided.' })
     }
 
     // is token valid?
     const decodedUserToken: any = jwt.verify(String(refreshToken), process.env.JWT_SECRET || "")
 
     // token exists on database?
-    await userTokenRepository.getByRefreshToken(refreshToken.toString())
+    // await userTokenRepository.getByRefreshToken(refreshToken.toString())
 
     const newAccessToken = jwt.sign({ id: decodedUserToken.id }, process.env.JWT_SECRET || "", {
       expiresIn: process.env.JWT_ACCESS_EXPIRES_IN,
