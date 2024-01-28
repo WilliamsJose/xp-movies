@@ -6,7 +6,6 @@ Express api for saving favorites movies
 
 ![Database](./xp-movie-CURRENT.webp)
 
-
 ## API Reference
 
 ### Create new user
@@ -89,10 +88,11 @@ Header:
 ---
 
 TODO:
-  - [ ] swagger docs
-  - [ ] redis cache
-  - [ ] kubernetes pods
-  - [ ] lambda crons
-  - [ ] free and paid user features
-  - [ ] GraphQL 
-  - [ ] WebSocket
+
+- [ ] swagger docs
+- [ ] redis cache
+- [ ] kubernetes pods
+- [ ] lambda crons
+- [ ] free and paid user features
+- [ ] GraphQL
+- [ ] WebSocket
