@@ -4,7 +4,7 @@ import { Router } from 'express'
 // import { AuthController } from "./controllers/AuthController";
 import { expressAdapter } from './infra/express/ExpressAdapter'
 import { makeAuthController, makeRegisterController } from './factories'
-import { RefreshToken } from './middleware/authMiddleware'
+import { RefreshTokenController } from './controllers/RefreshTokenController'
 import { UserTokenRepository } from './repositories/userTokenRepository'
 
 const routes = Router()
@@ -12,7 +12,7 @@ const routes = Router()
 // routes.get('/favorites/all', verifyToken, (req, res) => new UserController().getAllFavorites(req, res))
 routes.get(
   '/refreshToken',
-  expressAdapter(new RefreshToken(new UserTokenRepository()))
+  expressAdapter(new RefreshTokenController(new UserTokenRepository()))
 )
 routes.post('/login', expressAdapter(makeAuthController()))
 routes.post('/register', expressAdapter(makeRegisterController()))
