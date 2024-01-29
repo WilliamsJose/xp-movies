@@ -1,10 +1,12 @@
-import { HTTPStatusCode } from '../enums/HTTPStatusCode'
-import { IController } from '../interfaces/controllers/IController'
-import { ICategoryRepository } from '../interfaces/repositories/ICategoryRepository'
-import { IMovieCategoryRepository } from '../interfaces/repositories/IMovieCategoryRepository'
-import { IMovieRepository } from '../interfaces/repositories/IMovieRepository'
-import { IUserMovieRepository } from '../interfaces/repositories/IUserMovieRepository'
-import { IUserRepository } from '../interfaces/repositories/IUserRepository'
+import { HTTPStatusCode } from '../enums'
+import { IController } from '../interfaces/controllers'
+import {
+  ICategoryRepository,
+  IMovieCategoryRepository,
+  IMovieRepository,
+  IUserMovieRepository,
+  IUserRepository
+} from '../interfaces/repositories'
 
 export class AddNewUserFavoriteController implements IController {
   constructor(

@@ -1,4 +1,4 @@
-import { IUser } from "../entities/IUser";
+import { IUser } from '../entities'
 
 export interface IUserRepository {
   getById(id: number): Promise<IUser | undefined>

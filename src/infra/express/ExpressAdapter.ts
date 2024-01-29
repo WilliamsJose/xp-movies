@@ -1,9 +1,8 @@
 import { Request, Response } from 'express'
-import { IController } from '../../interfaces/controllers/IController'
+import { IController } from '../../interfaces/controllers'
 
 export function expressAdapter(controller: IController) {
   return async (req: Request, res: Response) => {
-
     const controllerRequest = {
       query: req?.query ?? {},
       body: req?.body ?? {},

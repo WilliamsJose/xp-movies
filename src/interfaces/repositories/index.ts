@@ -1,0 +1,6 @@
+export * from './IUserRepository'
+export * from './IMovieRepository'
+export * from './ICategoryRepository'
+export * from './IUserMovieRepository'
+export * from './IUserTokenRepository'
+export * from './IMovieCategoryRepository'

@@ -1,10 +1,8 @@
 import { Repository } from 'typeorm'
 import { AppDataSource } from '../data-source'
-import { UserMovie } from '../entities/UserMovie'
-import { IUserMovie } from '../interfaces/entities/IUserMovie'
-import { IUserMovieRepository } from '../interfaces/repositories/IUserMovieRepository'
-import { IUser } from '../interfaces/entities/IUser'
-import { IMovie } from '../interfaces/entities/IMovie'
+import { UserMovie } from '../entities'
+import { IUser, IUserMovie, IMovie } from '../interfaces/entities'
+import { IUserMovieRepository } from '../interfaces/repositories'
 
 export class UserMovieRepository implements IUserMovieRepository {
   private repository: Repository<IUserMovie>

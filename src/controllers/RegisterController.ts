@@ -1,15 +1,15 @@
-import { HTTPStatusCode } from "../enums/HTTPStatusCode"
-import { validate } from "email-validator"
 import bcrypt from 'bcrypt'
-import { IController } from "../interfaces/controllers/IController"
-import { IUserRepository } from "../interfaces/repositories/IUserRepository"
+import { validate } from 'email-validator'
+import { HTTPStatusCode } from '../enums'
+import { IController } from '../interfaces/controllers'
+import { IUserRepository } from '../interfaces/repositories'
 
 export class RegisterController implements IController {
   constructor(private userRepository: IUserRepository) {}
 
   async handle(request: any): Promise<any> {
     const { name, email, password } = request.body
-    
+
     if (!name || !email || !password) {
       return {
         status: HTTPStatusCode.BadRequest,
@@ -35,7 +35,7 @@ export class RegisterController implements IController {
       return {
         status: HTTPStatusCode.Created,
         body: {
-          newUser 
+          newUser
         }
       }
     } catch (error: any) {

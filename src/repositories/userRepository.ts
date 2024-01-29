@@ -1,12 +1,12 @@
-import { Repository } from "typeorm";
-import { AppDataSource } from "../data-source";
-import { User } from "../entities/User";
-import { IUser } from "../interfaces/entities/IUser";
-import { IUserRepository } from "../interfaces/repositories/IUserRepository";
+import { Repository } from 'typeorm'
+import { AppDataSource } from '../data-source'
+import { User } from '../entities'
+import { IUser } from '../interfaces/entities'
+import { IUserRepository } from '../interfaces/repositories'
 
 export class UserRepository implements IUserRepository {
   private repository: Repository<IUser>
-  
+
   constructor() {
     this.repository = AppDataSource.getRepository(User)
   }
@@ -23,7 +23,9 @@ export class UserRepository implements IUserRepository {
 
   async save(name: string, email: string, password: string): Promise<IUser | undefined> {
     const newUser = {
-      name, email, password
+      name,
+      email,
+      password
     }
 
     const createdUser = this.repository.create(newUser)

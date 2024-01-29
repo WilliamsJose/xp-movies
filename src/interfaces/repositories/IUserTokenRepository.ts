@@ -1,5 +1,4 @@
-import { IUser } from "../entities/IUser";
-import { IUserToken } from "../entities/IUserToken";
+import { IUser, IUserToken } from '../entities'
 
 export interface IUserTokenRepository {
   getNewAccessToken(refreshToken: string): Promise<IUserToken | undefined>

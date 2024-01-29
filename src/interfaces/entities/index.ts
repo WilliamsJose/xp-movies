@@ -1,0 +1,6 @@
+export * from './IUser'
+export * from './IMovie'
+export * from './ICategory'
+export * from './IUserMovie'
+export * from './IUserToken'
+export * from './IMovieCategory'

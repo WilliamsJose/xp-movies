@@ -1,6 +1,6 @@
-import { HTTPStatusCode } from '../enums/HTTPStatusCode'
-import { IController } from '../interfaces/controllers/IController'
-import { IUserMovieRepository } from '../interfaces/repositories/IUserMovieRepository'
+import { HTTPStatusCode } from '../enums'
+import { IController } from '../interfaces/controllers'
+import { IUserMovieRepository } from '../interfaces/repositories'
 
 export class FindAllUserFavorites implements IController {
   constructor(private userMovieRepository: IUserMovieRepository) {}

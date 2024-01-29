@@ -1,6 +1,4 @@
-import { ICategory } from '../entities/ICategory'
-import { IMovie } from '../entities/IMovie'
-import { IMovieCategory } from '../entities/IMovieCategory'
+import { ICategory, IMovie, IMovieCategory } from '../entities'
 
 export interface IMovieCategoryRepository {
   getById(id: number): Promise<IMovieCategory | undefined>

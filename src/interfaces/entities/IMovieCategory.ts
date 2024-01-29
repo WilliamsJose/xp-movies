@@ -1,5 +1,4 @@
-import { ICategory } from "./ICategory"
-import { IMovie } from "./IMovie"
+import { ICategory, IMovie } from './'
 
 export interface IMovieCategory {
   id: number

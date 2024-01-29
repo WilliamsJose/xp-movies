@@ -1,4 +1,4 @@
-import { IMovie } from '../entities/IMovie'
+import { IMovie } from '../entities'
 
 export interface IMovieRepository {
   getByImdb(imdbId: string): Promise<IMovie | undefined>

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { Request, Response, NextFunction } from 'express'
-import { HTTPStatusCode } from '../enums/HTTPStatusCode'
+import { HTTPStatusCode } from '../enums'
 
 declare module 'express' {
   interface Request {

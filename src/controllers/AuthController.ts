@@ -1,13 +1,8 @@
-// import { Request, Response } from "express"
-// import { IAuthController } from "../interfaces/controllers/IAuthController"
-// import { userRepository } from "../repositories/userRepository"
-// import { userTokenRepository } from "../repositories/userTokenRepository";
 import bcrypt from 'bcrypt'
-import jwt from "jsonwebtoken"
-import { HTTPStatusCode } from "../enums/HTTPStatusCode";
-import { IController } from "../interfaces/controllers/IController";
-import { IUserRepository } from "../interfaces/repositories/IUserRepository";
-import { IUserTokenRepository } from "../interfaces/repositories/IUserTokenRepository";
+import jwt from 'jsonwebtoken'
+import { HTTPStatusCode } from '../enums'
+import { IController } from '../interfaces/controllers'
+import { IUserRepository, IUserTokenRepository } from '../interfaces/repositories'
 
 export class AuthController implements IController {
   constructor(private userRepository: IUserRepository, private userTokenRepository: IUserTokenRepository) {}
@@ -38,13 +33,13 @@ export class AuthController implements IController {
         }
       }
 
-      const accessToken = jwt.sign({ id: userFound.id }, process.env.JWT_SECRET || "", {
-        expiresIn: process.env.JWT_ACCESS_EXPIRES_IN,
-      });
+      const accessToken = jwt.sign({ id: userFound.id }, process.env.JWT_SECRET || '', {
+        expiresIn: process.env.JWT_ACCESS_EXPIRES_IN
+      })
 
-      const refreshToken = jwt.sign({ id: userFound.id }, process.env.JWT_SECRET || "", {
-        expiresIn: process.env.JWT_REFRESH_EXPIRES_IN,
-      });
+      const refreshToken = jwt.sign({ id: userFound.id }, process.env.JWT_SECRET || '', {
+        expiresIn: process.env.JWT_REFRESH_EXPIRES_IN
+      })
 
       const refreshTokenFound = await this.userTokenRepository.getByUserId(userFound.id)
 
@@ -55,8 +50,8 @@ export class AuthController implements IController {
       }
 
       const headers = {
-        'Authorization': accessToken,
-        'refreshToken': refreshToken
+        Authorization: accessToken,
+        refreshToken: refreshToken
       }
 
       return {

@@ -1,6 +1,4 @@
-import { IMovie } from '../entities/IMovie'
-import { IUser } from '../entities/IUser'
-import { IUserMovie } from '../entities/IUserMovie'
+import { IMovie, IUser, IUserMovie } from '../entities'
 
 export interface IUserMovieRepository {
   getByUserId(id: number): Promise<IUserMovie[] | undefined>
