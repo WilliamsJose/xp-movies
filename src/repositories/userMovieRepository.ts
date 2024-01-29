@@ -1,12 +1,12 @@
-import { Repository } from "typeorm";
-import { AppDataSource } from "../data-source";
-import { UserMovie } from "../entities/UserMovie";
-import { IUserMovie } from "../interfaces/entities/IUserMovie";
-import { IUserMovieRepository } from "../interfaces/repositories/IUserMovieRepository";
-import { IUser } from "../interfaces/entities/IUser";
-import { IMovie } from "../interfaces/entities/IMovie";
+import { Repository } from 'typeorm'
+import { AppDataSource } from '../data-source'
+import { UserMovie } from '../entities/UserMovie'
+import { IUserMovie } from '../interfaces/entities/IUserMovie'
+import { IUserMovieRepository } from '../interfaces/repositories/IUserMovieRepository'
+import { IUser } from '../interfaces/entities/IUser'
+import { IMovie } from '../interfaces/entities/IMovie'
 
-class UserMovieRepository implements IUserMovieRepository {
+export class UserMovieRepository implements IUserMovieRepository {
   private repository: Repository<IUserMovie>
 
   constructor() {
@@ -24,5 +24,3 @@ class UserMovieRepository implements IUserMovieRepository {
     return saved ?? undefined
   }
 }
-
-export const userMovieRepository = new UserMovieRepository()

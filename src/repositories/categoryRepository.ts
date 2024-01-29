@@ -1,10 +1,10 @@
-import { In, Repository } from "typeorm";
-import { AppDataSource } from "../data-source";
-import { Category } from "../entities/Category";
-import { ICategory } from "../interfaces/entities/ICategory";
-import { ICategoryRepository } from "../interfaces/repositories/ICategoryRepository";
+import { In, Repository } from 'typeorm'
+import { AppDataSource } from '../data-source'
+import { Category } from '../entities/Category'
+import { ICategory } from '../interfaces/entities/ICategory'
+import { ICategoryRepository } from '../interfaces/repositories/ICategoryRepository'
 
-class CategoryRepository implements ICategoryRepository {
+export class CategoryRepository implements ICategoryRepository {
   private repository: Repository<ICategory>
 
   constructor() {
@@ -16,17 +16,15 @@ class CategoryRepository implements ICategoryRepository {
     return category ?? undefined
   }
 
-  async getManyByIds(id: number[]): Promise<ICategory[] | undefined>  {
-    
-    const categories = await this.repository.find({ where: {
-      id: In(id),
-    }, 
-      select: ['id', 'title', 'createdAt', 'updatedAt'] ,
+  async getManyByIds(id: number[]): Promise<ICategory[] | undefined> {
+    const categories = await this.repository.find({
+      where: {
+        id: In(id)
+      },
+      select: ['id', 'title', 'createdAt', 'updatedAt'],
       order: { id: 'ASC' }
     })
 
     return categories ?? undefined
   }
 }
-
-export const categoryRepository = new CategoryRepository()

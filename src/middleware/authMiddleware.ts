@@ -1,21 +1,21 @@
-import jwt from "jsonwebtoken"
-import { Request, Response, NextFunction } from "express"
-import { HTTPStatusCode } from "../enums/HTTPStatusCode";
+import jwt from 'jsonwebtoken'
+import { Request, Response, NextFunction } from 'express'
+import { HTTPStatusCode } from '../enums/HTTPStatusCode'
 
 declare module 'express' {
   interface Request {
-    userId?: string;
+    userId?: string
   }
 }
 
 export async function verifyToken(req: Request, res: Response, next: NextFunction): Promise<Response | undefined> {
-  const token = req.header('Authorization')
+  const token = req.header('authorization')
   if (!token) {
     return res.status(HTTPStatusCode.Unauthorized).json({ message: 'Access denied' })
   }
   try {
-    const decodedToken: any = jwt.verify(token, process.env.JWT_SECRET || "")
-    req['userId'] = decodedToken.id
+    const decodedToken: any = jwt.verify(token, process.env.JWT_SECRET || '')
+    req.query['userId'] = decodedToken.id
     next()
   } catch (error) {
     res.status(HTTPStatusCode.Unauthorized).json({ message: 'Invalid token' })

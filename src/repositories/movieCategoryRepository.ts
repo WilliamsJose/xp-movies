@@ -1,12 +1,12 @@
-import { Repository } from "typeorm";
-import { AppDataSource } from "../data-source";
-import { MovieCategory } from "../entities/MovieCategory";
-import { IMovieCategoryRepository } from "../interfaces/repositories/IMovieCategoryRepository";
-import { IMovieCategory } from "../interfaces/entities/IMovieCategory";
-// import { IMovie } from "../interfaces/entities/IMovie";
-// import { ICategory } from "../interfaces/entities/ICategory";
+import { Repository } from 'typeorm'
+import { AppDataSource } from '../data-source'
+import { MovieCategory } from '../entities/MovieCategory'
+import { IMovieCategoryRepository } from '../interfaces/repositories/IMovieCategoryRepository'
+import { IMovieCategory } from '../interfaces/entities/IMovieCategory'
+import { IMovie } from '../interfaces/entities/IMovie'
+import { ICategory } from '../interfaces/entities/ICategory'
 
-class MovieCategoryRepository implements IMovieCategoryRepository {
+export class MovieCategoryRepository implements IMovieCategoryRepository {
   private repository: Repository<IMovieCategory>
 
   constructor() {
@@ -17,9 +17,11 @@ class MovieCategoryRepository implements IMovieCategoryRepository {
   //   throw new Error("Method not implemented.");
   // }
 
-  // async save(movie: IMovie, categories: ICategory[] ): Promise<IMovieCategory | undefined> {
-  //   throw new Error("Method not implemented.");
-  // }
-}
+  async save(movie: IMovie, categories: ICategory[]): Promise<IMovieCategory[] | undefined> {
+    const saved: IMovieCategory[] = categories.map((category) => this.repository.create({ movie, category }))
 
-export const movieCategoryRepository = new MovieCategoryRepository()
+    await this.repository.save(saved)
+
+    return saved ?? undefined
+  }
+}
