@@ -1,7 +1,4 @@
 import { Router } from 'express'
-// import { UserController } from "./controllers/UserController";
-// import { refreshToken } from "./middleware/authMiddleware";
-// import { AuthController } from "./controllers/AuthController";
 import { expressAdapter } from './infra/express/ExpressAdapter'
 import {
   makeAuthController,
