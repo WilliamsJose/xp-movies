@@ -1,20 +1,20 @@
 import { Router } from 'express'
 import { expressAdapter } from './infra/express/ExpressAdapter'
+import { verifyToken } from './middleware/authMiddleware'
 import {
   makeAddNewUserFavoriteController,
   makeAuthController,
+  makeFindAllUserFavorites,
   makeRefreshTokenController,
   makeRegisterController
 } from './factories'
-import { verifyToken } from './middleware/authMiddleware'
 
 const routes = Router()
 
-// routes.get('/favorites/all', verifyToken, (req, res) => new UserController().getAllFavorites(req, res))
+routes.get('/favorites/all', verifyToken, expressAdapter(makeFindAllUserFavorites()))
 routes.get('/refreshToken', expressAdapter(makeRefreshTokenController()))
 routes.post('/login', expressAdapter(makeAuthController()))
 routes.post('/register', expressAdapter(makeRegisterController()))
-// routes.post('/user/addFavorite', verifyToken, (req, res) => new UserController().addFavorite(req, res))
 routes.post('/user/addFavorite', verifyToken, expressAdapter(makeAddNewUserFavoriteController()))
 
 export default routes
