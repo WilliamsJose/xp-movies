@@ -13,9 +13,10 @@ export class MovieCategoryRepository implements IMovieCategoryRepository {
     this.repository = AppDataSource.getRepository(MovieCategory)
   }
 
-  // async getById(id: number): Promise<IMovieCategory | undefined> {
-  //   throw new Error("Method not implemented.");
-  // }
+  async getById(id: number): Promise<IMovieCategory | undefined> {
+    const movieCategory = await this.repository.findOneBy({ id })
+    return movieCategory ?? undefined
+  }
 
   async save(movie: IMovie, categories: ICategory[]): Promise<IMovieCategory[] | undefined> {
     const saved: IMovieCategory[] = categories.map((category) => this.repository.create({ movie, category }))
