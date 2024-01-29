@@ -27,7 +27,8 @@ export class UserTokenRepository implements IUserTokenRepository {
     return refreshToken ?? undefined
   }
 
-  // async getByRefreshToken(refreshToken: string): Promise<IUserToken | undefined> {
-  //   throw new Error("Method not implemented.");
-  // }
+  async getNewAccessToken(refreshToken: string): Promise<IUserToken | undefined> {
+    const accessToken = await this.repository.findOneBy({ refreshToken })
+    return accessToken ?? undefined
+  }
 }

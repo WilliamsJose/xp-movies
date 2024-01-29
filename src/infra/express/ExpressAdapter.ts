@@ -7,11 +7,12 @@ export function expressAdapter(controller: IController) {
     const controllerRequest = {
       query: req?.query ?? {},
       body: req?.body ?? {},
-      params: req?.params ?? {}
+      params: req?.params ?? {},
+      headers: req?.headers ?? {}
     }
 
-    const { status, body, query } = await controller.handle(controllerRequest)
+    const { status, body, headers } = await controller.handle(controllerRequest)
 
-    return res.header(query).status(status).json(body)
+    return res.header(headers).status(status).json(body)
   }
 }

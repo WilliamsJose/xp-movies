@@ -61,7 +61,7 @@ export class AuthController implements IController {
 
       return {
         status: HTTPStatusCode.OK,
-        query: headers,
+        headers,
         body: {
           message: 'Sign in Successfully!'
         }
