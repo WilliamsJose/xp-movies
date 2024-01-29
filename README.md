@@ -1,6 +1,6 @@
-# XP MOVIES
+<h1 align='center'>XP MOVIES</h1>
 
-Express api for saving favorites movies
+<p align='center'>Express api for saving favorites movies</p>
 
 ## Database diagram
 
