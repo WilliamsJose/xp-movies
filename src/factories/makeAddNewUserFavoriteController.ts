@@ -1,4 +1,4 @@
-import { AddNewUserFavoriteController } from '../controllers/AddNewUserFavoriteController'
+import { AddNewUserFavoriteController } from '../controllers'
 import { CategoryRepository } from '../repositories/categoryRepository'
 import { MovieCategoryRepository } from '../repositories/movieCategoryRepository'
 import { MovieRepository } from '../repositories/movieRepository'

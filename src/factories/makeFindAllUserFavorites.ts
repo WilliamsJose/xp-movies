@@ -1,4 +1,4 @@
-import { FindAllUserFavorites } from '../controllers/FindAllUserFavorites'
+import { FindAllUserFavorites } from '../controllers'
 import { UserMovieRepository } from '../repositories/userMovieRepository'
 
 export const makeFindAllUserFavorites = () => {
