@@ -1,6 +1,5 @@
 import { AuthController } from '../controllers'
-import { UserRepository } from '../repositories/userRepository'
-import { UserTokenRepository } from '../repositories/userTokenRepository'
+import { UserRepository, UserTokenRepository } from '../repositories'
 
 export const makeAuthController = () => {
   return new AuthController(new UserRepository(), new UserTokenRepository())
