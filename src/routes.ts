@@ -3,10 +3,7 @@ import { Router } from 'express'
 // import { refreshToken } from "./middleware/authMiddleware";
 // import { AuthController } from "./controllers/AuthController";
 import { expressAdapter } from './infra/express/ExpressAdapter'
-import { RegisterController } from './controllers/RegisterController'
-import { expressAdapter } from './infra/express/ExpressAdapter'
-import { UserRepository } from './repositories/userRepository'
-import { AuthController } from './controllers/AuthController'
+import { makeAuthController, makeRegisterController } from './factories'
 import { RefreshToken } from './middleware/authMiddleware'
 import { UserTokenRepository } from './repositories/userTokenRepository'
 
@@ -17,16 +14,8 @@ routes.get(
   '/refreshToken',
   expressAdapter(new RefreshToken(new UserTokenRepository()))
 )
-routes.post(
-  '/login',
-  expressAdapter(
-    new AuthController(new UserRepository(), new UserTokenRepository())
-  )
-)
-routes.post(
-  '/register',
-  expressAdapter(new RegisterController(new UserRepository()))
-)
+routes.post('/login', expressAdapter(makeAuthController()))
+routes.post('/register', expressAdapter(makeRegisterController()))
 // routes.post('/user/addFavorite', verifyToken, (req, res) => new UserController().addFavorite(req, res))
 
 export default routes
