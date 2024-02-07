@@ -20,12 +20,12 @@ export class RefreshTokenController implements IController {
       }
 
       // is token valid?
-      const decodedUserToken: any = jwt.verify(String(refreshToken), process.env.JWT_SECRET || '')
+      const decodedUserToken: any = jwt.verify(String(refreshToken), process.env.REFRESH_SECRET || '')
 
       // token exists on database?
       await this.userTokenRepository.getNewAccessToken(refreshToken.toString())
 
-      const newAccessToken = jwt.sign({ id: decodedUserToken.id }, process.env.JWT_SECRET || '', {
+      const newAccessToken = jwt.sign({ id: decodedUserToken.id }, process.env.ACCESS_SECRET || '', {
         expiresIn: process.env.JWT_ACCESS_EXPIRES_IN
       })
 

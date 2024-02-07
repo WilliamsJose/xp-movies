@@ -14,7 +14,7 @@ export async function verifyToken(req: Request, res: Response, next: NextFunctio
     return res.status(HTTPStatusCode.Unauthorized).json({ message: 'Access denied' })
   }
   try {
-    const decodedToken: any = jwt.verify(token, process.env.JWT_SECRET || '')
+    const decodedToken: any = jwt.verify(token, process.env.ACCESS_SECRET || '')
     req.query['userId'] = decodedToken.id
     next()
   } catch (error) {

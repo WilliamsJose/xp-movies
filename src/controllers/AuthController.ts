@@ -33,11 +33,11 @@ export class AuthController implements IController {
         }
       }
 
-      const accessToken = jwt.sign({ id: userFound.id }, process.env.JWT_SECRET || '', {
+      const accessToken = jwt.sign({ id: userFound.id }, process.env.ACCESS_SECRET || '', {
         expiresIn: process.env.JWT_ACCESS_EXPIRES_IN
       })
 
-      const refreshToken = jwt.sign({ id: userFound.id }, process.env.JWT_SECRET || '', {
+      const refreshToken = jwt.sign({ id: userFound.id }, process.env.REFRESH_SECRET || '', {
         expiresIn: process.env.JWT_REFRESH_EXPIRES_IN
       })
 
