@@ -1,4 +1,4 @@
-import { Repository } from 'typeorm'
+import { DeleteResult, Repository } from 'typeorm'
 import { AppDataSource } from '../data-source'
 import { UserMovie } from '../entities'
 import { IUser, IUserMovie, IMovie } from '../interfaces/entities'
@@ -9,6 +9,11 @@ export class UserMovieRepository implements IUserMovieRepository {
 
   constructor() {
     this.repository = AppDataSource.getRepository(UserMovie)
+  }
+
+  async deleteByUserMovieId(id: number): Promise<DeleteResult | undefined> {
+    const deletedUserMovie = await this.repository.delete({ id })
+    return deletedUserMovie ?? undefined
   }
 
   async getByUserId(id: number): Promise<IUserMovie[] | undefined> {
