@@ -7,9 +7,9 @@
     "dev": "nodemon --exec ts-node src/server.ts",
     "migration:generate": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:generate ./src/migrations/default",
     "migration:run": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:run",
-    "formatCode": "npx prettier src/ --write",
-    "checkCode": "npx eslint src/",
-    "lint": "eslint --fix src/",
+    "format": "prettier . --write",
+    "lint": "eslint . --fix",
+    "quality": "npm run lint && npm run format",
     "prepare": "husky"
   },
   "dependencies": {
