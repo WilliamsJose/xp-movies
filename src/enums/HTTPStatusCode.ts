@@ -1,11 +1,10 @@
-
 export enum HTTPStatusCode {
-  OK                  = 200,
-  Created             = 201,
-  BadRequest          = 400,
-  Unauthorized        = 401,
-  Forbbiden           = 403,
-  NotFound            = 404,
-  Conflict            = 409,
-  InternalServerError = 500,
+  OK = 200,
+  Created = 201,
+  BadRequest = 400,
+  Unauthorized = 401,
+  Forbbiden = 403,
+  NotFound = 404,
+  Conflict = 409,
+  InternalServerError = 500
 }

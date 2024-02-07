@@ -5,7 +5,10 @@ import { IController } from '../interfaces/controllers'
 import { IUserRepository, IUserTokenRepository } from '../interfaces/repositories'
 
 export class AuthController implements IController {
-  constructor(private userRepository: IUserRepository, private userTokenRepository: IUserTokenRepository) {}
+  constructor(
+    private userRepository: IUserRepository,
+    private userTokenRepository: IUserTokenRepository
+  ) {}
 
   async handle(request: any): Promise<any> {
     const { email, password } = request.body
