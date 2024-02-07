@@ -2,7 +2,7 @@ import { HTTPStatusCode } from '../enums'
 import { IController } from '../interfaces/controllers'
 import { IUserMovieRepository } from '../interfaces/repositories'
 
-export class FindAllUserFavorites implements IController {
+export class FindAllUserFavoritesController implements IController {
   constructor(private userMovieRepository: IUserMovieRepository) {}
 
   async handle(request: any): Promise<any> {

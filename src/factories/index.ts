@@ -1,5 +1,5 @@
 export * from './makeAuthController'
 export * from './makeRegisterController'
-export * from './makeFindAllUserFavorites'
+export * from './makeFindAllUserFavoritesController'
 export * from './makeRefreshTokenController'
 export * from './makeAddNewUserFavoriteController'
