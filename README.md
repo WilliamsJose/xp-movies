@@ -42,7 +42,7 @@ Body:
 ### Add new favorite movie
 
 ```http
-  POST /user/addFavorite
+  POST /user/favorites
 ```
 
 Header:
@@ -64,7 +64,19 @@ Body:
 ### Get all user favorite movies
 
 ```http
-  GET /favorites/all
+  GET /user/favorites
+```
+
+Header:
+
+```json
+  Authorization = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+
+### Delete one user favorite movie
+
+```http
+  DEL /user/favorites/1
 ```
 
 Header:
@@ -76,7 +88,7 @@ Header:
 ### Refresh access token
 
 ```http
-  GET /refreshToken
+  GET /token/refresh
 ```
 
 Header:
