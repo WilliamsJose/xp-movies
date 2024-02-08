@@ -1,7 +1,7 @@
 import { RegisterController } from '../controllers'
 import { UserRepository } from '../repositories'
-import { RegisterService } from '../services/RegisterService'
+import { RegisterUseCase } from '../use_cases/RegisterUseCase'
 
 export const makeRegisterController = () => {
-  return new RegisterController(new RegisterService(new UserRepository()))
+  return new RegisterController(new RegisterUseCase(new UserRepository()))
 }

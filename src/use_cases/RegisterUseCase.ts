@@ -5,7 +5,7 @@ import { IUserRepository } from '../interfaces/repositories'
 import { IService } from '../interfaces/services/IService'
 import { IUser } from '../interfaces/entities'
 
-export class RegisterService implements IService {
+export class RegisterUseCase implements IService {
   constructor(private userRepository: IUserRepository) {}
 
   async execute(name: string, email: string, password: string): Promise<IUser | RegisterEnum | undefined> {
