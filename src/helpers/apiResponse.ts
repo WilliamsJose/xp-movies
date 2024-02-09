@@ -27,6 +27,14 @@ export const createResponseCreated = (message: any, headers?: any) => {
   }
 }
 
+export const createResponseNoContent = (message?: any, headers?: any) => {
+  message = typeof message === 'string' ? { message } : message
+  return {
+    status: HTTPStatusCode.NoContent,
+    headers
+  }
+}
+
 export const createResponseForbbiden = (message: any, headers?: any) => {
   message = typeof message === 'string' ? { message } : message
   return {

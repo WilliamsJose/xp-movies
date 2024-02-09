@@ -1,6 +1,6 @@
 export enum RegisterEnum {
   Success = 'New user created!',
-  InvalidParameters = 'You must provide a name, email and password.',
-  InvalidEmail = 'Email is not valid!',
+  InvalidParameters = 'Missing params: name, email or password.',
+  InvalidEmail = 'Invalid Email!',
   AlreadyRegistered = 'Email already registered!'
 }
