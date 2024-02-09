@@ -1,3 +1,6 @@
 module.exports = {
-  'src/*.{js,jsx,ts,tsx}': (filenames) => [`prettier --write "${filenames.join('" "')}"`, `npm run lint`]
+  '*.{js,jsx,ts,tsx}': (filenames) => [
+    `eslint --fix "${filenames.join('" "')}"`,
+    `prettier --write "${filenames.join('" "')}"`
+  ]
 }
