@@ -9,13 +9,13 @@ import { IController } from '../interfaces/controllers'
 import { IUseCase } from '../interfaces/use_cases/IUseCase'
 
 export class RegisterController implements IController {
-  constructor(private registerService: IUseCase) {}
+  constructor(private registerUseCase: IUseCase) {}
 
   async handle(request: any): Promise<any> {
     const { name, email, password } = request.body
 
     try {
-      const result = await this.registerService.execute(name, email, password)
+      const result = await this.registerUseCase.execute(name, email, password)
 
       switch (result) {
         case RegisterEnum.InvalidParameters:

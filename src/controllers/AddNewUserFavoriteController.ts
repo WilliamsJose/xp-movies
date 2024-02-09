@@ -1,83 +1,38 @@
-import { HTTPStatusCode } from '../enums'
-import { IController } from '../interfaces/controllers'
+import { AddNewUserFavoriteEnum } from '../enums/AddNewUserFavoriteEnum'
 import {
-  ICategoryRepository,
-  IMovieCategoryRepository,
-  IMovieRepository,
-  IUserMovieRepository,
-  IUserRepository
-} from '../interfaces/repositories'
+  createResponseBadRequest,
+  createResponseInternalServerError,
+  createResponseNotFound,
+  createResponseSuccess,
+  createResponseUnauthorized
+} from '../helpers/apiResponse'
+import { IController } from '../interfaces/controllers'
+import { IUseCase } from '../interfaces/use_cases/IUseCase'
 
 export class AddNewUserFavoriteController implements IController {
-  constructor(
-    private userRepository: IUserRepository,
-    private movieRepository: IMovieRepository,
-    private categoryRepository: ICategoryRepository,
-    private movieCategoryRepository: IMovieCategoryRepository,
-    private userMovieRepository: IUserMovieRepository
-  ) {}
+  constructor(private addNewUserFavoriteUseCase: IUseCase) {}
 
   async handle(request: any): Promise<any> {
     const { userId } = request.query
     const { imdbId, categoriesIds, title } = request.body
 
     try {
-      if (!userId) throw new Error('Missing param userId')
+      const result = await this.addNewUserFavoriteUseCase.execute(userId, imdbId, categoriesIds, title)
 
-      const user = await this.userRepository.getById(+userId)
-
-      // TODO implement cool validators
-      if (!user) {
-        return {
-          status: HTTPStatusCode.BadRequest,
-          body: {
-            message: 'You must be registered to add an favorite.'
-          }
-        }
-      }
-      if (!imdbId || Array(categoriesIds).length < 1 || !title) {
-        return {
-          status: HTTPStatusCode.BadRequest,
-          body: {
-            message: 'You must provide an imdbId, categoriesIds and title.'
-          }
-        }
-      }
-
-      let movie = await this.movieRepository.getByImdb(imdbId)
-      if (!movie) {
-        movie = await this.movieRepository.save(imdbId, title)
-      }
-
-      const categories = await this.categoryRepository.getManyByIds(categoriesIds)
-      if (!categories || categories.length === 0) {
-        return {
-          status: HTTPStatusCode.BadRequest,
-          body: {
-            message: 'Invalid categories.'
-          }
-        }
-      }
-
-      if (movie) {
-        await this.movieCategoryRepository.save(movie, categories)
-        await this.userMovieRepository.save(user, movie)
-      }
-
-      return {
-        status: HTTPStatusCode.OK,
-        body: {
-          message: 'New favorite movie added!'
-        }
+      switch (result) {
+        case AddNewUserFavoriteEnum.InvalidCategories:
+          return createResponseBadRequest(AddNewUserFavoriteEnum.InvalidCategories)
+        case AddNewUserFavoriteEnum.InvalidParameters:
+          return createResponseBadRequest(AddNewUserFavoriteEnum.InvalidParameters)
+        case AddNewUserFavoriteEnum.UserNotFound:
+          return createResponseNotFound(AddNewUserFavoriteEnum.UserNotFound)
+        case AddNewUserFavoriteEnum.UserNotRegistered:
+          return createResponseUnauthorized(AddNewUserFavoriteEnum.UserNotRegistered)
+        default:
+          return createResponseSuccess(result)
       }
     } catch (error: any) {
-      // TODO treat better and not return everything
-      return {
-        status: HTTPStatusCode.InternalServerError,
-        body: {
-          message: error
-        }
-      }
+      return createResponseInternalServerError(error)
     }
   }
 }

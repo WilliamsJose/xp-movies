@@ -6,13 +6,16 @@ import {
   UserMovieRepository,
   UserRepository
 } from '../repositories'
+import { AddNewUserFavoriteUseCase } from '../use_cases/AddNewUserFavoriteUseCase'
 
 export const makeAddNewUserFavoriteController = () => {
   return new AddNewUserFavoriteController(
-    new UserRepository(),
-    new MovieRepository(),
-    new CategoryRepository(),
-    new MovieCategoryRepository(),
-    new UserMovieRepository()
+    new AddNewUserFavoriteUseCase(
+      new UserRepository(),
+      new MovieRepository(),
+      new CategoryRepository(),
+      new MovieCategoryRepository(),
+      new UserMovieRepository()
+    )
   )
 }
