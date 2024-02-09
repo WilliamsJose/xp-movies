@@ -22,7 +22,7 @@ export class RefreshTokenController implements IController {
         case RefreshTokenEnum.InvalidToken:
           return createResponseBadRequest(RefreshTokenEnum.InvalidToken)
         default:
-          return createResponseSuccess(RefreshTokenEnum.Success)
+          return createResponseSuccess(RefreshTokenEnum.Success, { Authorization: result })
       }
     } catch (error: any) {
       return createResponseInternalServerError(error)

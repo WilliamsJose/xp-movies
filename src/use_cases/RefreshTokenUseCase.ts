@@ -1,12 +1,12 @@
 import { RefreshTokenEnum } from '../enums/RefreshTokenEnum'
 import { IUseCase } from '../interfaces/use_cases/IUseCase'
 import jwt from 'jsonwebtoken'
-import { UserTokenRepository } from '../repositories'
+import { IUserTokenRepository } from '../interfaces/repositories'
 
 export class RefreshTokenUseCase implements IUseCase {
-  constructor(private userTokenRepository: UserTokenRepository) {}
+  constructor(private userTokenRepository: IUserTokenRepository) {}
 
-  async execute(refreshToken: string): Promise<any | undefined> {
+  async execute(refreshToken: string): Promise<string | RefreshTokenEnum | undefined> {
     try {
       if (!refreshToken) return RefreshTokenEnum.InvalidParameters
 

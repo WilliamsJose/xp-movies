@@ -17,7 +17,11 @@ export class UserMovieRepository implements IUserMovieRepository {
   }
 
   async getByUserId(id: number): Promise<IUserMovie[] | undefined> {
-    const userFavorites = await this.repository.findBy({ user: { id } })
+    const userFavorites = await this.repository.find({
+      select: { id: true, createdAt: true, updatedAt: true, user: { id: true, name: true, email: true } },
+      where: { user: { id } },
+      relations: { user: true, movie: true }
+    })
     return userFavorites ?? undefined
   }
 

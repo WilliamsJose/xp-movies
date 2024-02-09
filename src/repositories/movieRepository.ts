@@ -1,4 +1,4 @@
-import { Repository } from 'typeorm'
+import { In, Repository } from 'typeorm'
 import { AppDataSource } from '../data-source'
 import { Movie } from '../entities'
 import { IMovie } from '../interfaces/entities'
@@ -9,6 +9,10 @@ export class MovieRepository implements IMovieRepository {
 
   constructor() {
     this.repository = AppDataSource.getRepository(Movie)
+  }
+  getManyById(moviesId: number[]): Promise<IMovie[] | undefined> {
+    const result = this.repository.findBy({ id: In(moviesId) })
+    return result ?? undefined
   }
 
   async getByImdb(imdbId: string): Promise<IMovie | undefined> {

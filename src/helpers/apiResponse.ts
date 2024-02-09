@@ -1,73 +1,73 @@
 import { HTTPStatusCode } from '../enums'
 
-export const createResponseBadRequest = (message: string) => {
+export const createResponseBadRequest = (message: any, headers?: any) => {
+  message = typeof message === 'string' ? { message } : message
   return {
     status: HTTPStatusCode.BadRequest,
-    body: {
-      message
-    }
+    headers,
+    body: message
   }
 }
 
-export const createResponseConflict = (message: string) => {
+export const createResponseConflict = (message: any, headers?: any) => {
+  message = typeof message === 'string' ? { message } : message
   return {
     status: HTTPStatusCode.Conflict,
-    body: {
-      message
-    }
+    headers,
+    body: message
   }
 }
 
-export const createResponseCreated = (message: string) => {
+export const createResponseCreated = (message: any, headers?: any) => {
+  message = typeof message === 'string' ? { message } : message
   return {
     status: HTTPStatusCode.Created,
-    body: {
-      message
-    }
+    headers,
+    body: message
   }
 }
 
-export const createResponseForbbiden = (message: string) => {
+export const createResponseForbbiden = (message: any, headers?: any) => {
+  message = typeof message === 'string' ? { message } : message
   return {
     status: HTTPStatusCode.Forbbiden,
-    body: {
-      message
-    }
+    headers,
+    body: message
   }
 }
 
-export const createResponseInternalServerError = (message: any) => {
+export const createResponseInternalServerError = (message: any, headers?: any) => {
+  message = typeof message === 'string' ? { message } : message
   return {
     status: HTTPStatusCode.InternalServerError,
-    body: {
-      message
-    }
+    headers,
+    body: message
   }
 }
 
-export const createResponseNotFound = (message: string) => {
+export const createResponseNotFound = (message: any, headers?: any) => {
+  message = typeof message === 'string' ? { message } : message
   return {
     status: HTTPStatusCode.NotFound,
-    body: {
-      message
-    }
+    headers,
+    body: message
   }
 }
 
-export const createResponseUnauthorized = (message: string) => {
+export const createResponseUnauthorized = (message: any, headers?: any) => {
+  message = typeof message === 'string' ? { message } : message
   return {
     status: HTTPStatusCode.Unauthorized,
-    body: {
-      message
-    }
+    headers,
+    body: message
   }
 }
 
-export const createResponseSuccess = (message: any) => {
+export const createResponseSuccess = (message: any, headers?: any) => {
+  message = typeof message === 'string' ? { message } : message
   return {
     status: HTTPStatusCode.OK,
-    body: {
-      message
-    }
+    headers,
+    body: message
   }
 }
