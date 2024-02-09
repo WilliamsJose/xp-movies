@@ -1,48 +1,31 @@
-import { HTTPStatusCode } from '../enums'
+import { RefreshTokenEnum } from '../enums/RefreshTokenEnum'
+import {
+  createResponseBadRequest,
+  createResponseInternalServerError,
+  createResponseSuccess
+} from '../helpers/apiResponse'
 import { IController } from '../interfaces/controllers'
-import { IUserTokenRepository } from '../interfaces/repositories'
-import jwt from 'jsonwebtoken'
+import { IUseCase } from '../interfaces/use_cases/IUseCase'
 
 export class RefreshTokenController implements IController {
-  constructor(private userTokenRepository: IUserTokenRepository) {}
+  constructor(private refreshTokenUseCase: IUseCase) {}
 
   async handle(request: any): Promise<any> {
     const { refreshtoken: refreshToken } = request.headers
 
     try {
-      if (!refreshToken) {
-        return {
-          status: HTTPStatusCode.BadRequest,
-          body: {
-            message: 'No refresh token provided.'
-          }
-        }
-      }
+      const result = await this.refreshTokenUseCase.execute(refreshToken)
 
-      // is token valid?
-      const decodedUserToken: any = jwt.verify(String(refreshToken), process.env.REFRESH_SECRET || '')
-
-      // token exists on database?
-      await this.userTokenRepository.getNewAccessToken(refreshToken.toString())
-
-      const newAccessToken = jwt.sign({ id: decodedUserToken.id }, process.env.ACCESS_SECRET || '', {
-        expiresIn: process.env.JWT_ACCESS_EXPIRES_IN
-      })
-
-      return {
-        status: HTTPStatusCode.OK,
-        headers: { Authorizaton: newAccessToken },
-        body: {
-          message: 'New access token generated'
-        }
+      switch (result) {
+        case RefreshTokenEnum.InvalidParameters:
+          return createResponseBadRequest(RefreshTokenEnum.InvalidParameters)
+        case RefreshTokenEnum.InvalidToken:
+          return createResponseBadRequest(RefreshTokenEnum.InvalidToken)
+        default:
+          return createResponseSuccess(RefreshTokenEnum.Success)
       }
     } catch (error: any) {
-      return {
-        status: HTTPStatusCode.InternalServerError,
-        body: {
-          message: 'No refresh token provided.'
-        }
-      }
+      return createResponseInternalServerError(error)
     }
   }
 }

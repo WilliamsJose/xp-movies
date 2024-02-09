@@ -6,10 +6,10 @@ import {
   createResponseSuccess
 } from '../helpers/apiResponse'
 import { IController } from '../interfaces/controllers'
-import { IService } from '../interfaces/services/IService'
+import { IUseCase } from '../interfaces/use_cases/IUseCase'
 
 export class RegisterController implements IController {
-  constructor(private registerService: IService) {}
+  constructor(private registerService: IUseCase) {}
 
   async handle(request: any): Promise<any> {
     const { name, email, password } = request.body
