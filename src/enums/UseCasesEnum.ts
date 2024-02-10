@@ -8,5 +8,8 @@ export enum UseCasesEnum {
   InvalidEmail = 7,
   UserNotFound = 8,
   UserNotRegistered = 9,
-  AlreadyRegistered = 10
+  AlreadyRegistered = 10,
+  LoginSuccess = 11,
+  DBInserted = 12,
+  DBDeleted = 13
 }

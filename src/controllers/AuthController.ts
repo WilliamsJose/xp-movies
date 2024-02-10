@@ -1,12 +1,7 @@
 import { IController } from '../domains/controllers'
-import {
-  createResponseBadRequest,
-  createResponseInternalServerError,
-  createResponseNotFound,
-  createResponseSuccess
-} from '../helpers/apiResponse'
+import { createResponseInternalServerError } from '../helpers/apiResponse'
 import { IUseCase } from '../domains/useCases/IUseCase'
-import { AuthEnum } from '../enums/AuthEnum'
+import { mapResponseToHTTP } from '../utils/mapResponseToHTTP'
 
 export class AuthController implements IController {
   constructor(private authUseCase: IUseCase) {}
@@ -16,14 +11,7 @@ export class AuthController implements IController {
 
     try {
       const result = await this.authUseCase.execute(email, password)
-      switch (result) {
-        case AuthEnum.InvalidCredentials:
-          return createResponseBadRequest(AuthEnum.InvalidCredentials)
-        case AuthEnum.UserNotFound:
-          return createResponseNotFound(AuthEnum.UserNotFound)
-        default:
-          return createResponseSuccess(AuthEnum.Success, result)
-      }
+      return mapResponseToHTTP(result)
     } catch (error: any) {
       return createResponseInternalServerError(error)
     }

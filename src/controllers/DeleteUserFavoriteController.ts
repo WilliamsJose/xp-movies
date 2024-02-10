@@ -1,7 +1,7 @@
-import { DeleteUserFavoriteEnum } from '../enums/DeleteUserFavoriteEnum'
-import { createResponseBadRequest, createResponseNoContent } from '../helpers/apiResponse'
+import { createResponseBadRequest } from '../helpers/apiResponse'
 import { IController } from '../domains/controllers'
 import { IUseCase } from '../domains/useCases/IUseCase'
+import { mapResponseToHTTP } from '../utils/mapResponseToHTTP'
 
 export class DeleteUserFavoriteController implements IController {
   constructor(private deleteUserFavoriteUseCase: IUseCase) {}
@@ -11,12 +11,7 @@ export class DeleteUserFavoriteController implements IController {
 
     try {
       const result = await this.deleteUserFavoriteUseCase.execute(userMovieId)
-      switch (result) {
-        case DeleteUserFavoriteEnum.InvalidParameters:
-          return createResponseBadRequest(DeleteUserFavoriteEnum.InvalidParameters)
-        default:
-          return createResponseNoContent(null, result)
-      }
+      return mapResponseToHTTP(result)
     } catch (error: any) {
       return createResponseBadRequest(error)
     }

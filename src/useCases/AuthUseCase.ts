@@ -1,27 +1,32 @@
-import { AuthEnum } from '../enums/AuthEnum'
 import { IUserRepository, IUserTokenRepository } from '../domains/repositories'
 import { IUseCase } from '../domains/useCases/IUseCase'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-
-type AuthResult = {
-  Authorization: string
-  refreshToken: string
-}
-
+import { UseCasesEnum } from '../enums/UseCasesEnum'
+import { IUseCaseResult } from '../domains/useCases/IUseCaseResult'
 export class AuthUseCase implements IUseCase {
   constructor(
     private userRepository: IUserRepository,
     private userTokenRepository: IUserTokenRepository
   ) {}
-  async execute(email: string, password: string): Promise<AuthResult | AuthEnum | undefined> {
+  async execute(email: string, password: string): Promise<IUseCaseResult> {
     const userFound = await this.userRepository.getByEmail(email)
 
-    if (!userFound) return AuthEnum.UserNotFound
+    if (!userFound) {
+      return {
+        code: UseCasesEnum.UserNotFound,
+        message: 'User Not found on database.'
+      }
+    }
 
     const successLogin = await bcrypt.compare(password, userFound.password)
 
-    if (!successLogin) return AuthEnum.InvalidCredentials
+    if (!successLogin) {
+      return {
+        code: UseCasesEnum.InvalidCredentials,
+        message: 'Wrong Email or Password.'
+      }
+    }
 
     const accessToken = jwt.sign({ id: userFound.id }, process.env.ACCESS_SECRET || '', {
       expiresIn: process.env.JWT_ACCESS_EXPIRES_IN
@@ -44,6 +49,10 @@ export class AuthUseCase implements IUseCase {
       refreshToken: refreshToken
     }
 
-    return headers
+    return {
+      code: UseCasesEnum.LoginSuccess,
+      message: 'User logged in successfully!',
+      headers
+    }
   }
 }

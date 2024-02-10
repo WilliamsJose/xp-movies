@@ -1,81 +1,80 @@
 import { HTTPStatusCode } from '../enums'
 
-export const createResponseBadRequest = (message: any, headers?: any) => {
-  message = typeof message === 'string' ? { message } : message
+export const createResponseBadRequest = (body: any, headers?: any) => {
+  body = typeof body === 'string' ? { body } : body
   return {
     status: HTTPStatusCode.BadRequest,
     headers,
-    body: message
+    body
   }
 }
 
-export const createResponseConflict = (message: any, headers?: any) => {
-  message = typeof message === 'string' ? { message } : message
+export const createResponseConflict = (body: any, headers?: any) => {
+  body = typeof body === 'string' ? { body } : body
   return {
     status: HTTPStatusCode.Conflict,
     headers,
-    body: message
+    body
   }
 }
 
-export const createResponseCreated = (message: any, headers?: any) => {
-  message = typeof message === 'string' ? { message } : message
+export const createResponseCreated = (body: any, headers?: any) => {
+  body = typeof body === 'string' ? { body } : body
   return {
     status: HTTPStatusCode.Created,
     headers,
-    body: message
+    body
   }
 }
 
-export const createResponseNoContent = (message?: any, headers?: any) => {
-  message = typeof message === 'string' ? { message } : message
+export const createResponseNoContent = (headers?: any) => {
   return {
     status: HTTPStatusCode.NoContent,
     headers
   }
 }
 
-export const createResponseForbbiden = (message: any, headers?: any) => {
-  message = typeof message === 'string' ? { message } : message
+export const createResponseForbbiden = (body: any, headers?: any) => {
+  body = typeof body === 'string' ? { body } : body
   return {
     status: HTTPStatusCode.Forbbiden,
     headers,
-    body: message
+    body
   }
 }
 
-export const createResponseInternalServerError = (message: any, headers?: any) => {
-  message = typeof message === 'string' ? { message } : message
+export const createResponseInternalServerError = (body: any, headers?: any) => {
+  body = typeof body === 'string' ? { body } : body
   return {
     status: HTTPStatusCode.InternalServerError,
     headers,
-    body: message
+    body
   }
 }
 
-export const createResponseNotFound = (message: any, headers?: any) => {
-  message = typeof message === 'string' ? { message } : message
+export const createResponseNotFound = (body: any, headers?: any) => {
+  body = typeof body === 'string' ? { body } : body
   return {
     status: HTTPStatusCode.NotFound,
     headers,
-    body: message
+    body
   }
 }
 
-export const createResponseUnauthorized = (message: any, headers?: any) => {
-  message = typeof message === 'string' ? { message } : message
+export const createResponseUnauthorized = (body: any, headers?: any) => {
+  body = typeof body === 'string' ? { body } : body
   return {
     status: HTTPStatusCode.Unauthorized,
     headers,
-    body: message
+    body
   }
 }
 
-export const createResponseSuccess = (message: any, headers?: any) => {
-  message = typeof message === 'string' ? { message } : message
+export const createResponseSuccess = (body: any, headers?: any) => {
+  body = typeof body === 'string' ? { message: body } : body
   return {
     status: HTTPStatusCode.OK,
     headers,
-    body: message
+    body
   }
 }
