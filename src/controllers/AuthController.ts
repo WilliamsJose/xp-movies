@@ -1,11 +1,11 @@
-import { IController } from '../interfaces/controllers'
+import { IController } from '../domains/controllers'
 import {
   createResponseBadRequest,
   createResponseInternalServerError,
   createResponseNotFound,
   createResponseSuccess
 } from '../helpers/apiResponse'
-import { IUseCase } from '../interfaces/useCases/IUseCase'
+import { IUseCase } from '../domains/useCases/IUseCase'
 import { AuthEnum } from '../enums/AuthEnum'
 
 export class AuthController implements IController {

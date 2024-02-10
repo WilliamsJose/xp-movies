@@ -8,7 +8,7 @@ import {
   UpdateDateColumn
 } from 'typeorm'
 import { User } from './'
-import { IUserToken } from '../interfaces/entities'
+import { IUserToken } from '../domains/entities'
 
 @Entity('user_token')
 export class UserToken implements IUserToken {

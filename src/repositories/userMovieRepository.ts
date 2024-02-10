@@ -1,8 +1,8 @@
 import { DeleteResult, Repository } from 'typeorm'
 import { AppDataSource } from '../data-source'
 import { UserMovie } from '../entities'
-import { IUser, IUserMovie, IMovie } from '../interfaces/entities'
-import { IUserMovieRepository } from '../interfaces/repositories'
+import { IUser, IUserMovie, IMovie } from '../domains/entities'
+import { IUserMovieRepository } from '../domains/repositories'
 
 export class UserMovieRepository implements IUserMovieRepository {
   private repository: Repository<IUserMovie>

@@ -1,7 +1,7 @@
 import { RefreshTokenEnum } from '../enums/RefreshTokenEnum'
-import { IUseCase } from '../interfaces/useCases/IUseCase'
+import { IUseCase } from '../domains/useCases/IUseCase'
 import jwt from 'jsonwebtoken'
-import { IUserTokenRepository } from '../interfaces/repositories'
+import { IUserTokenRepository } from '../domains/repositories'
 
 export class RefreshTokenUseCase implements IUseCase {
   constructor(private userTokenRepository: IUserTokenRepository) {}

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { IController } from '../../interfaces/controllers'
+import { IController } from '../../domains/controllers'
 
 export function expressAdapter(controller: IController) {
   return async (req: Request, res: Response) => {

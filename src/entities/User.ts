@@ -8,7 +8,7 @@ import {
   UpdateDateColumn
 } from 'typeorm'
 import { UserMovie, UserToken } from './'
-import { IUser } from '../interfaces/entities'
+import { IUser } from '../domains/entities'
 
 @Entity('user')
 export class User implements IUser {

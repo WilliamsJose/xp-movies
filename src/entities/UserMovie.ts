@@ -1,6 +1,6 @@
 import { CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 import { User, Movie } from './'
-import { IUserMovie } from '../interfaces/entities'
+import { IUserMovie } from '../domains/entities'
 
 @Entity('user_movie')
 export class UserMovie implements IUserMovie {

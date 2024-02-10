@@ -1,8 +1,8 @@
 import { In, Repository } from 'typeorm'
 import { AppDataSource } from '../data-source'
 import { Category } from '../entities'
-import { ICategory } from '../interfaces/entities'
-import { ICategoryRepository } from '../interfaces/repositories'
+import { ICategory } from '../domains/entities'
+import { ICategoryRepository } from '../domains/repositories'
 
 export class CategoryRepository implements ICategoryRepository {
   private repository: Repository<ICategory>

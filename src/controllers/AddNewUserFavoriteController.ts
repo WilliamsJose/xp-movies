@@ -6,8 +6,8 @@ import {
   createResponseSuccess,
   createResponseUnauthorized
 } from '../helpers/apiResponse'
-import { IController } from '../interfaces/controllers'
-import { IUseCase } from '../interfaces/useCases/IUseCase'
+import { IController } from '../domains/controllers'
+import { IUseCase } from '../domains/useCases/IUseCase'
 
 export class AddNewUserFavoriteController implements IController {
   constructor(private addNewUserFavoriteUseCase: IUseCase) {}

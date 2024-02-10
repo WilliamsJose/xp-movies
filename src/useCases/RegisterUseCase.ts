@@ -1,9 +1,9 @@
 import bcrypt from 'bcrypt'
 import { validate } from 'email-validator'
 import { RegisterEnum } from '../enums'
-import { IUserRepository } from '../interfaces/repositories'
-import { IUseCase } from '../interfaces/useCases/IUseCase'
-import { IUser } from '../interfaces/entities'
+import { IUserRepository } from '../domains/repositories'
+import { IUseCase } from '../domains/useCases/IUseCase'
+import { IUser } from '../domains/entities'
 
 export class RegisterUseCase implements IUseCase {
   constructor(private userRepository: IUserRepository) {}

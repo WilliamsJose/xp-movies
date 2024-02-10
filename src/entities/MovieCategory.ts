@@ -1,6 +1,6 @@
 import { CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 import { Movie, Category } from './'
-import { IMovieCategory } from '../interfaces/entities'
+import { IMovieCategory } from '../domains/entities'
 
 @Entity('movie_category')
 export class MovieCategory implements IMovieCategory {

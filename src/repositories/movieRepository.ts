@@ -1,8 +1,8 @@
 import { In, Repository } from 'typeorm'
 import { AppDataSource } from '../data-source'
 import { Movie } from '../entities'
-import { IMovie } from '../interfaces/entities'
-import { IMovieRepository } from '../interfaces/repositories'
+import { IMovie } from '../domains/entities'
+import { IMovieRepository } from '../domains/repositories'
 
 export class MovieRepository implements IMovieRepository {
   private repository: Repository<IMovie>

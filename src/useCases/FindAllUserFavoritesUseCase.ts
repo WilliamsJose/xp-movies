@@ -1,7 +1,7 @@
 import { FindAllUserFavoritesEnum } from '../enums/FindAllUserFavoritesEnum'
-import { IUserMovie } from '../interfaces/entities'
-import { IMovieRepository, IUserMovieRepository } from '../interfaces/repositories'
-import { IUseCase } from '../interfaces/useCases/IUseCase'
+import { IUserMovie } from '../domains/entities'
+import { IMovieRepository, IUserMovieRepository } from '../domains/repositories'
+import { IUseCase } from '../domains/useCases/IUseCase'
 
 export class FindAllUserFavoritesUseCase implements IUseCase {
   constructor(

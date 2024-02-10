@@ -1,13 +1,13 @@
 import { AddNewUserFavoriteEnum } from '../enums/AddNewUserFavoriteEnum'
-import { IUserMovie } from '../interfaces/entities'
+import { IUserMovie } from '../domains/entities'
 import {
   ICategoryRepository,
   IMovieCategoryRepository,
   IMovieRepository,
   IUserMovieRepository,
   IUserRepository
-} from '../interfaces/repositories'
-import { IUseCase } from '../interfaces/useCases/IUseCase'
+} from '../domains/repositories'
+import { IUseCase } from '../domains/useCases/IUseCase'
 
 export class AddNewUserFavoriteUseCase implements IUseCase {
   constructor(

@@ -1,4 +1,4 @@
-import { IUser, IMovie } from './'
+import { IUser, IMovie } from '.'
 
 export interface IUserMovie {
   id: number

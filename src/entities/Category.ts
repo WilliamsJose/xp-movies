@@ -1,6 +1,6 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 import { MovieCategory } from './'
-import { ICategory } from '../interfaces/entities'
+import { ICategory } from '../domains/entities'
 
 @Entity('category')
 export class Category implements ICategory {
