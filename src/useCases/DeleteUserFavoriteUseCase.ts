@@ -1,6 +1,6 @@
 import { DeleteUserFavoriteEnum } from '../enums/DeleteUserFavoriteEnum'
 import { IUserMovieRepository } from '../interfaces/repositories'
-import { IUseCase } from '../interfaces/use_cases/IUseCase'
+import { IUseCase } from '../interfaces/useCases/IUseCase'
 
 export class deleteUserFavoriteUseCase implements IUseCase {
   constructor(private userMovieRepository: IUserMovieRepository) {}

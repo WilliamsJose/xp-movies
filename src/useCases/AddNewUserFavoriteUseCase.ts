@@ -7,7 +7,7 @@ import {
   IUserMovieRepository,
   IUserRepository
 } from '../interfaces/repositories'
-import { IUseCase } from '../interfaces/use_cases/IUseCase'
+import { IUseCase } from '../interfaces/useCases/IUseCase'
 
 export class AddNewUserFavoriteUseCase implements IUseCase {
   constructor(

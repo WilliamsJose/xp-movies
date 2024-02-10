@@ -1,4 +1,4 @@
-import { AddNewUserFavoriteEnum } from '../enums/AddNewUserFavoriteEnum'
+import { AddNewUserFavoriteEnum } from '../enums'
 import {
   createResponseBadRequest,
   createResponseInternalServerError,
@@ -7,7 +7,7 @@ import {
   createResponseUnauthorized
 } from '../helpers/apiResponse'
 import { IController } from '../interfaces/controllers'
-import { IUseCase } from '../interfaces/use_cases/IUseCase'
+import { IUseCase } from '../interfaces/useCases/IUseCase'
 
 export class AddNewUserFavoriteController implements IController {
   constructor(private addNewUserFavoriteUseCase: IUseCase) {}

@@ -1,6 +1,6 @@
 import { AuthEnum } from '../enums/AuthEnum'
 import { IUserRepository, IUserTokenRepository } from '../interfaces/repositories'
-import { IUseCase } from '../interfaces/use_cases/IUseCase'
+import { IUseCase } from '../interfaces/useCases/IUseCase'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 

@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { expressAdapter } from './infra/express'
-import { verifyToken } from './middleware'
+import { verifyToken } from './middlewares'
 import {
   makeAddNewUserFavoriteController,
   makeAuthController,

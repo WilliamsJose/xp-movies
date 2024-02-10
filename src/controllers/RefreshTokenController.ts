@@ -5,7 +5,7 @@ import {
   createResponseSuccess
 } from '../helpers/apiResponse'
 import { IController } from '../interfaces/controllers'
-import { IUseCase } from '../interfaces/use_cases/IUseCase'
+import { IUseCase } from '../interfaces/useCases/IUseCase'
 
 export class RefreshTokenController implements IController {
   constructor(private refreshTokenUseCase: IUseCase) {}

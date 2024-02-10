@@ -1,7 +1,7 @@
 import { DeleteUserFavoriteEnum } from '../enums/DeleteUserFavoriteEnum'
 import { createResponseBadRequest, createResponseNoContent } from '../helpers/apiResponse'
 import { IController } from '../interfaces/controllers'
-import { IUseCase } from '../interfaces/use_cases/IUseCase'
+import { IUseCase } from '../interfaces/useCases/IUseCase'
 
 export class DeleteUserFavoriteController implements IController {
   constructor(private deleteUserFavoriteUseCase: IUseCase) {}

@@ -1,2 +1,7 @@
 export * from './HTTPStatusCode'
 export * from './RegisterEnum'
+export * from './AddNewUserFavoriteEnum'
+export * from './DeleteUserFavoriteEnum'
+export * from './AuthEnum'
+export * from './FindAllUserFavoritesEnum'
+export * from './RefreshTokenEnum'

@@ -1,5 +1,5 @@
 import { RefreshTokenEnum } from '../enums/RefreshTokenEnum'
-import { IUseCase } from '../interfaces/use_cases/IUseCase'
+import { IUseCase } from '../interfaces/useCases/IUseCase'
 import jwt from 'jsonwebtoken'
 import { IUserTokenRepository } from '../interfaces/repositories'
 

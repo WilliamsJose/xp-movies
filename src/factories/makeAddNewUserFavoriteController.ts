@@ -6,7 +6,7 @@ import {
   UserMovieRepository,
   UserRepository
 } from '../repositories'
-import { AddNewUserFavoriteUseCase } from '../use_cases/AddNewUserFavoriteUseCase'
+import { AddNewUserFavoriteUseCase } from '../useCases/AddNewUserFavoriteUseCase'
 
 export const makeAddNewUserFavoriteController = () => {
   return new AddNewUserFavoriteController(

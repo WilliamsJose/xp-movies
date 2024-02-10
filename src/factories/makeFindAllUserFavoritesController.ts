@@ -1,6 +1,6 @@
 import { FindAllUserFavoritesController } from '../controllers'
 import { MovieRepository, UserMovieRepository } from '../repositories'
-import { FindAllUserFavoritesUseCase } from '../use_cases/FindAllUserFavoritesUseCase'
+import { FindAllUserFavoritesUseCase } from '../useCases/FindAllUserFavoritesUseCase'
 
 export const makeFindAllUserFavoritesController = () => {
   return new FindAllUserFavoritesController(

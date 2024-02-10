@@ -5,7 +5,7 @@ import {
   createResponseNotFound,
   createResponseSuccess
 } from '../helpers/apiResponse'
-import { IUseCase } from '../interfaces/use_cases/IUseCase'
+import { IUseCase } from '../interfaces/useCases/IUseCase'
 import { AuthEnum } from '../enums/AuthEnum'
 
 export class AuthController implements IController {
