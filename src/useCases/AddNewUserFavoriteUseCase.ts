@@ -1,5 +1,3 @@
-import { AddNewUserFavoriteEnum } from '../enums/AddNewUserFavoriteEnum'
-import { IUserMovie } from '../domains/entities'
 import {
   ICategoryRepository,
   IMovieCategoryRepository,
@@ -8,6 +6,8 @@ import {
   IUserRepository
 } from '../domains/repositories'
 import { IUseCase } from '../domains/useCases/IUseCase'
+import { IUseCaseResult } from '../domains/useCases/IUseCaseResult'
+import { UseCasesEnum } from '../enums/UseCasesEnum'
 
 export class AddNewUserFavoriteUseCase implements IUseCase {
   constructor(
@@ -18,17 +18,26 @@ export class AddNewUserFavoriteUseCase implements IUseCase {
     private userMovieRepository: IUserMovieRepository
   ) {}
 
-  async execute(
-    userId: number,
-    imdbId: string,
-    categoriesIds: number[],
-    title: string
-  ): Promise<IUserMovie | AddNewUserFavoriteEnum | undefined> {
-    if (!userId || !imdbId || Array(categoriesIds).length < 1 || !title) return AddNewUserFavoriteEnum.InvalidParameters
+  async execute(userId: number, imdbId: string, categoriesIds: number[], title: string): Promise<IUseCaseResult> {
+    if (!userId || !imdbId || Array(categoriesIds).length < 1 || !title) {
+      return {
+        errors: {
+          code: UseCasesEnum.InvalidParameters,
+          message: 'Missing params: userId, imdbId, categoriesIds or title.'
+        }
+      }
+    }
 
     const user = await this.userRepository.getById(userId)
 
-    if (!user) return AddNewUserFavoriteEnum.UserNotFound
+    if (!user) {
+      return {
+        errors: {
+          code: UseCasesEnum.UserNotFound,
+          message: 'User not found on database.'
+        }
+      }
+    }
 
     let movie = await this.movieRepository.getByImdb(imdbId)
     if (!movie) {
@@ -36,7 +45,14 @@ export class AddNewUserFavoriteUseCase implements IUseCase {
     }
 
     const categories = await this.categoryRepository.getManyByIds(categoriesIds)
-    if (!categories || categories.length === 0) return AddNewUserFavoriteEnum.InvalidCategories
+    if (!categories || categories.length === 0) {
+      return {
+        errors: {
+          code: UseCasesEnum.InvalidCategories,
+          message: 'Invalid categories.'
+        }
+      }
+    }
 
     let userMovie
     if (movie) {
@@ -44,6 +60,8 @@ export class AddNewUserFavoriteUseCase implements IUseCase {
       userMovie = await this.userMovieRepository.save(user, movie)
     }
 
-    return userMovie
+    return {
+      result: userMovie
+    }
   }
 }

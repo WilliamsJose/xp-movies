@@ -1,17 +1,20 @@
 import bcrypt from 'bcrypt'
-import { validate } from 'email-validator'
 import { RegisterEnum } from '../enums'
 import { IUserRepository } from '../domains/repositories'
 import { IUseCase } from '../domains/useCases/IUseCase'
 import { IUser } from '../domains/entities'
+import { IEmailValidator } from '../domains/validators/IEmailValidator'
 
 export class RegisterUseCase implements IUseCase {
-  constructor(private userRepository: IUserRepository) {}
+  constructor(
+    private userRepository: IUserRepository,
+    private emailValidator: IEmailValidator
+  ) {}
 
   async execute(name: string, email: string, password: string): Promise<IUser | RegisterEnum | undefined> {
     if (!name || !email || !password) return RegisterEnum.InvalidParameters
 
-    if (!validate(email)) return RegisterEnum.InvalidEmail
+    if (!this.emailValidator.isValid(email)) return RegisterEnum.InvalidEmail
 
     const encryptedPass = await bcrypt.hash(password, 12)
 
