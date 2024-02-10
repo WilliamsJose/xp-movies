@@ -2,7 +2,7 @@ import { IUserRepository, IUserTokenRepository } from '../domains/repositories'
 import { IUseCase } from '../domains/useCases/IUseCase'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import { UseCasesEnum } from '../enums/UseCasesEnum'
+import { UseCaseResponsesEnum } from '../enums/UseCaseResponsesEnum'
 import { IUseCaseResult } from '../domains/useCases/IUseCaseResult'
 export class AuthUseCase implements IUseCase {
   constructor(
@@ -14,7 +14,7 @@ export class AuthUseCase implements IUseCase {
 
     if (!userFound) {
       return {
-        code: UseCasesEnum.UserNotFound,
+        code: UseCaseResponsesEnum.UserNotFound,
         message: 'User Not found on database.'
       }
     }
@@ -23,7 +23,7 @@ export class AuthUseCase implements IUseCase {
 
     if (!successLogin) {
       return {
-        code: UseCasesEnum.InvalidCredentials,
+        code: UseCaseResponsesEnum.InvalidCredentials,
         message: 'Wrong Email or Password.'
       }
     }
@@ -50,7 +50,7 @@ export class AuthUseCase implements IUseCase {
     }
 
     return {
-      code: UseCasesEnum.LoginSuccess,
+      code: UseCaseResponsesEnum.LoginSuccess,
       message: 'User logged in successfully!',
       headers
     }

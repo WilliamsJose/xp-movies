@@ -1,4 +1,4 @@
-export enum UseCasesEnum {
+export enum UseCaseResponsesEnum {
   Success = 1,
   InvalidParameters = 2,
   InvalidCategories = 3,

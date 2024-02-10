@@ -1,5 +1,5 @@
 import { IUseCaseResult } from '../domains/useCases/IUseCaseResult'
-import { UseCasesEnum } from '../enums/UseCasesEnum'
+import { UseCaseResponsesEnum } from '../enums/UseCaseResponsesEnum'
 import {
   createResponseBadRequest,
   createResponseNoContent,
@@ -12,15 +12,15 @@ export const mapResponseToHTTP = (response: IUseCaseResult): any => {
   const { code, data, message, headers } = response
 
   switch (code) {
-    case UseCasesEnum.Success:
+    case UseCaseResponsesEnum.Success:
       return createResponseSuccess(data)
-    case UseCasesEnum.LoginSuccess:
+    case UseCaseResponsesEnum.LoginSuccess:
       return createResponseSuccess(message, headers)
-    case UseCasesEnum.DBDeleted:
+    case UseCaseResponsesEnum.DBDeleted:
       return createResponseNoContent(headers)
-    case UseCasesEnum.UserNotFound:
+    case UseCaseResponsesEnum.UserNotFound:
       return createResponseNotFound(message)
-    case UseCasesEnum.UserNotRegistered:
+    case UseCaseResponsesEnum.UserNotRegistered:
       return createResponseUnauthorized(message)
     default:
       return createResponseBadRequest(message)

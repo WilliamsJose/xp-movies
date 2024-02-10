@@ -7,7 +7,7 @@ import {
 } from '../domains/repositories'
 import { IUseCase } from '../domains/useCases/IUseCase'
 import { IUseCaseResult } from '../domains/useCases/IUseCaseResult'
-import { UseCasesEnum } from '../enums/UseCasesEnum'
+import { UseCaseResponsesEnum } from '../enums/UseCaseResponsesEnum'
 
 export class AddNewUserFavoriteUseCase implements IUseCase {
   constructor(
@@ -21,7 +21,7 @@ export class AddNewUserFavoriteUseCase implements IUseCase {
   async execute(userId: number, imdbId: string, categoriesIds: number[], title: string): Promise<IUseCaseResult> {
     if (!userId || !imdbId || Array(categoriesIds).length < 1 || !title) {
       return {
-        code: UseCasesEnum.InvalidParameters,
+        code: UseCaseResponsesEnum.InvalidParameters,
         message: 'Missing params: userId, imdbId, categoriesIds or title.'
       }
     }
@@ -30,7 +30,7 @@ export class AddNewUserFavoriteUseCase implements IUseCase {
 
     if (!user) {
       return {
-        code: UseCasesEnum.UserNotFound,
+        code: UseCaseResponsesEnum.UserNotFound,
         message: 'User not found on database.'
       }
     }
@@ -43,7 +43,7 @@ export class AddNewUserFavoriteUseCase implements IUseCase {
     const categories = await this.categoryRepository.getManyByIds(categoriesIds)
     if (!categories || categories.length === 0) {
       return {
-        code: UseCasesEnum.InvalidCategories,
+        code: UseCaseResponsesEnum.InvalidCategories,
         message: 'Invalid categories.'
       }
     }
@@ -55,7 +55,7 @@ export class AddNewUserFavoriteUseCase implements IUseCase {
     }
 
     return {
-      code: UseCasesEnum.Success,
+      code: UseCaseResponsesEnum.Success,
       data: userMovie
     }
   }
