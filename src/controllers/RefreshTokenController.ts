@@ -6,11 +6,21 @@ import {
 } from '../helpers/apiResponse'
 import { IController } from '../domains/controllers'
 import { IUseCase } from '../domains/useCases/IUseCase'
+import { HTTPStatusCode } from '../enums'
+import { Get, Route, Request, Header } from 'tsoa'
 
+interface RefreshTokenControllerResponse {
+  status: HTTPStatusCode
+  headers: any
+  body: any
+}
+
+@Route('token/refresh')
 export class RefreshTokenController implements IController {
   constructor(private refreshTokenUseCase: IUseCase) {}
 
-  async handle(request: any): Promise<any> {
+  @Get()
+  async handle(@Header('refreshtoken') @Request() request: any): Promise<RefreshTokenControllerResponse> {
     const { refreshtoken: refreshToken } = request.headers
 
     try {
