@@ -1,9 +1,9 @@
 import bcrypt from 'bcrypt'
-import { RegisterEnum } from '../enums'
 import { IUserRepository } from '../domains/repositories'
 import { IUseCase } from '../domains/useCases/IUseCase'
-import { IUser } from '../domains/entities'
 import { IEmailValidator } from '../domains/validators/IEmailValidator'
+import { IUseCaseResult } from '../domains/useCases/IUseCaseResult'
+import { UseCaseResponsesEnum } from '../enums/UseCaseResponsesEnum'
 
 export class RegisterUseCase implements IUseCase {
   constructor(
@@ -11,18 +11,34 @@ export class RegisterUseCase implements IUseCase {
     private emailValidator: IEmailValidator
   ) {}
 
-  async execute(name: string, email: string, password: string): Promise<IUser | RegisterEnum | undefined> {
-    if (!name || !email || !password) return RegisterEnum.InvalidParameters
+  async execute(name: string, email: string, password: string): Promise<IUseCaseResult> {
+    if (!name || !email || !password) {
+      return {
+        code: UseCaseResponsesEnum.InvalidParameters,
+        body: 'Missing params: name, email or password.'
+      }
+    }
 
-    if (!this.emailValidator.isValid(email)) return RegisterEnum.InvalidEmail
+    if (!this.emailValidator.isValid(email)) {
+      return {
+        code: UseCaseResponsesEnum.InvalidEmail,
+        body: 'Invalid Email!'
+      }
+    }
 
     const encryptedPass = await bcrypt.hash(password, 12)
 
     try {
       const newUser = await this.userRepository.save(name, email, encryptedPass)
-      return newUser
+      return {
+        code: UseCaseResponsesEnum.Success,
+        body: newUser
+      }
     } catch (error) {
-      return RegisterEnum.AlreadyRegistered
+      return {
+        code: UseCaseResponsesEnum.AlreadyRegistered,
+        body: 'Email already registered!'
+      }
     }
   }
 }

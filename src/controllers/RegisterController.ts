@@ -1,12 +1,7 @@
-import { RegisterEnum } from '../enums'
-import {
-  createResponseBadRequest,
-  createResponseConflict,
-  createResponseInternalServerError,
-  createResponseSuccess
-} from '../helpers/apiResponse'
+import { createResponseInternalServerError } from '../helpers/apiResponse'
 import { IController } from '../domains/controllers'
 import { IUseCase } from '../domains/useCases/IUseCase'
+import { mapResponseToHTTP } from '../utils/mapResponseToHTTP'
 
 export class RegisterController implements IController {
   constructor(private registerUseCase: IUseCase) {}
@@ -16,17 +11,7 @@ export class RegisterController implements IController {
 
     try {
       const result = await this.registerUseCase.execute(name, email, password)
-
-      switch (result) {
-        case RegisterEnum.InvalidParameters:
-          return createResponseBadRequest(RegisterEnum.InvalidParameters)
-        case RegisterEnum.InvalidEmail:
-          return createResponseBadRequest(RegisterEnum.InvalidEmail)
-        case RegisterEnum.AlreadyRegistered:
-          return createResponseConflict(RegisterEnum.AlreadyRegistered)
-        default:
-          return createResponseSuccess(result)
-      }
+      return mapResponseToHTTP(result)
     } catch (error) {
       return createResponseInternalServerError(error)
     }
