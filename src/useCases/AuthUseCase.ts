@@ -15,7 +15,7 @@ export class AuthUseCase implements IUseCase {
     if (!userFound) {
       return {
         code: UseCaseResponsesEnum.UserNotFound,
-        message: 'User Not found on database.'
+        body: 'User Not found on database.'
       }
     }
 
@@ -24,7 +24,7 @@ export class AuthUseCase implements IUseCase {
     if (!successLogin) {
       return {
         code: UseCaseResponsesEnum.InvalidCredentials,
-        message: 'Wrong Email or Password.'
+        body: 'Wrong Email or Password.'
       }
     }
 
@@ -50,8 +50,8 @@ export class AuthUseCase implements IUseCase {
     }
 
     return {
-      code: UseCaseResponsesEnum.LoginSuccess,
-      message: 'User logged in successfully!',
+      code: UseCaseResponsesEnum.Success,
+      body: 'User logged in successfully!',
       headers
     }
   }

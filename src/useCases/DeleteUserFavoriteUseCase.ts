@@ -9,7 +9,7 @@ export class deleteUserFavoriteUseCase implements IUseCase {
     if (!userMovieId) {
       return {
         code: UseCaseResponsesEnum.InvalidParameters,
-        message: 'Missing param: userMovieId.'
+        body: 'Missing param: userMovieId.'
       }
     }
 

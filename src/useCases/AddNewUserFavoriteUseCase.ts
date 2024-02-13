@@ -22,7 +22,7 @@ export class AddNewUserFavoriteUseCase implements IUseCase {
     if (!userId || !imdbId || Array(categoriesIds).length < 1 || !title) {
       return {
         code: UseCaseResponsesEnum.InvalidParameters,
-        message: 'Missing params: userId, imdbId, categoriesIds or title.'
+        body: 'Missing params: userId, imdbId, categoriesIds or title.'
       }
     }
 
@@ -31,7 +31,7 @@ export class AddNewUserFavoriteUseCase implements IUseCase {
     if (!user) {
       return {
         code: UseCaseResponsesEnum.UserNotFound,
-        message: 'User not found on database.'
+        body: 'User not found on database.'
       }
     }
 
@@ -44,7 +44,7 @@ export class AddNewUserFavoriteUseCase implements IUseCase {
     if (!categories || categories.length === 0) {
       return {
         code: UseCaseResponsesEnum.InvalidCategories,
-        message: 'Invalid categories.'
+        body: 'Invalid categories.'
       }
     }
 
@@ -56,7 +56,7 @@ export class AddNewUserFavoriteUseCase implements IUseCase {
 
     return {
       code: UseCaseResponsesEnum.Success,
-      data: userMovie
+      body: userMovie
     }
   }
 }

@@ -1,39 +1,21 @@
-import { RefreshTokenEnum } from '../enums/RefreshTokenEnum'
-import {
-  createResponseBadRequest,
-  createResponseInternalServerError,
-  createResponseSuccess
-} from '../helpers/apiResponse'
+import { createResponseInternalServerError } from '../helpers/apiResponse'
 import { IController } from '../domains/controllers'
 import { IUseCase } from '../domains/useCases/IUseCase'
-import { HTTPStatusCode } from '../enums'
 import { Get, Route, Request, Header } from 'tsoa'
-
-interface RefreshTokenControllerResponse {
-  status: HTTPStatusCode
-  headers: any
-  body: any
-}
+import { IControllerResponse } from '../domains/controllers/IControllerResponse'
+import { mapResponseToHTTP } from '../utils/mapResponseToHTTP'
 
 @Route('token/refresh')
 export class RefreshTokenController implements IController {
   constructor(private refreshTokenUseCase: IUseCase) {}
 
   @Get()
-  async handle(@Header('refreshtoken') @Request() request: any): Promise<RefreshTokenControllerResponse> {
+  async handle(@Header('refreshtoken') @Request() request: any): Promise<IControllerResponse> {
     const { refreshtoken: refreshToken } = request.headers
 
     try {
       const result = await this.refreshTokenUseCase.execute(refreshToken)
-
-      switch (result) {
-        case RefreshTokenEnum.InvalidParameters:
-          return createResponseBadRequest(RefreshTokenEnum.InvalidParameters)
-        case RefreshTokenEnum.InvalidToken:
-          return createResponseBadRequest(RefreshTokenEnum.InvalidToken)
-        default:
-          return createResponseSuccess(RefreshTokenEnum.Success, { Authorization: result })
-      }
+      return mapResponseToHTTP(result)
     } catch (error: any) {
       return createResponseInternalServerError(error)
     }

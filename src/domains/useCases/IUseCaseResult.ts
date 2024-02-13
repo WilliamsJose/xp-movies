@@ -1,6 +1,5 @@
 export interface IUseCaseResult {
   code: number
-  message?: string
+  body?: any
   headers?: any
-  data?: any
 }

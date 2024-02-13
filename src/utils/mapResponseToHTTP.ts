@@ -9,20 +9,18 @@ import {
 } from '../helpers/apiResponse'
 
 export const mapResponseToHTTP = (response: IUseCaseResult): any => {
-  const { code, data, message, headers } = response
+  const { code, body, headers } = response
 
   switch (code) {
     case UseCaseResponsesEnum.Success:
-      return createResponseSuccess(data)
-    case UseCaseResponsesEnum.LoginSuccess:
-      return createResponseSuccess(message, headers)
+      return createResponseSuccess(body, headers)
     case UseCaseResponsesEnum.DBDeleted:
       return createResponseNoContent(headers)
     case UseCaseResponsesEnum.UserNotFound:
-      return createResponseNotFound(message)
+      return createResponseNotFound(body, headers)
     case UseCaseResponsesEnum.UserNotRegistered:
-      return createResponseUnauthorized(message)
+      return createResponseUnauthorized(body, headers)
     default:
-      return createResponseBadRequest(message)
+      return createResponseBadRequest(body, headers)
   }
 }
