@@ -10,6 +10,13 @@ export class AuthUseCase implements IUseCase {
     private userTokenRepository: IUserTokenRepository
   ) {}
   async execute(email: string, password: string): Promise<IUseCaseResult> {
+    if (!email || !password) {
+      return {
+        code: UseCaseResponsesEnum.InvalidParameters,
+        body: 'Missing params: email or password!'
+      }
+    }
+
     const userFound = await this.userRepository.getByEmail(email)
 
     if (!userFound) {
@@ -24,7 +31,7 @@ export class AuthUseCase implements IUseCase {
     if (!successLogin) {
       return {
         code: UseCaseResponsesEnum.InvalidCredentials,
-        body: 'Wrong Email or Password.'
+        body: 'Wrong Email or Password!'
       }
     }
 
