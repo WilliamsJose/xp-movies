@@ -11,8 +11,10 @@
     "lint": "eslint . --fix",
     "quality": "npm run lint && npm run format",
     "prepare": "husky",
-    "build": "tsoa spec-and-routes && tsc",
-    "start": "node dist/src/app.js"
+    "build:app": "tsc",
+    "build:docs": "tsoa spec-and-routes && tsc --project ./tsconfig.docs.json",
+    "docs": "node dist/docs/app.js",
+    "app": "node dist/app.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
