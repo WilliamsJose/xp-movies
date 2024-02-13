@@ -9,6 +9,14 @@ import { mapResponseToHTTP } from '../utils/mapResponseToHTTP'
 export class RefreshTokenController implements IController {
   constructor(private refreshTokenUseCase: IUseCase) {}
 
+  /**
+   * Generates a new Access Token from a Refresh Token.
+   * @param {string} refreshtoken - The Refresh Token used to generate the new Access Token.
+   * @returns {string} - The newly generated Access Token.
+   * @description
+   * This function takes a Refresh Token as input and generates a new Access Token.
+   * It is used to refresh the authentication session without requiring the user to log in again.
+   */
   @Get()
   async handle(@Header('refreshtoken') @Request() request: any): Promise<IControllerResponse> {
     const { refreshtoken: refreshToken } = request.headers
