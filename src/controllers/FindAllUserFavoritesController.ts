@@ -1,12 +1,7 @@
-import { FindAllUserFavoritesEnum } from '../enums/FindAllUserFavoritesEnum'
-import {
-  createResponseBadRequest,
-  createResponseInternalServerError,
-  createResponseNotFound,
-  createResponseSuccess
-} from '../helpers/apiResponse'
+import { createResponseInternalServerError } from '../helpers/apiResponse'
 import { IController } from '../domains/controllers'
 import { IUseCase } from '../domains/useCases/IUseCase'
+import { mapResponseToHTTP } from '../utils/mapResponseToHTTP'
 
 export class FindAllUserFavoritesController implements IController {
   constructor(private findAllUserFavoriteUseCase: IUseCase) {}
@@ -16,15 +11,7 @@ export class FindAllUserFavoritesController implements IController {
 
     try {
       const result = await this.findAllUserFavoriteUseCase.execute(userId)
-
-      switch (result) {
-        case FindAllUserFavoritesEnum.InvalidParameters:
-          return createResponseBadRequest(FindAllUserFavoritesEnum.InvalidParameters)
-        case FindAllUserFavoritesEnum.InvalidUser:
-          return createResponseNotFound(FindAllUserFavoritesEnum.InvalidUser)
-        default:
-          return createResponseSuccess({ favorites: result })
-      }
+      return mapResponseToHTTP(result)
     } catch (error: any) {
       return createResponseInternalServerError(error)
     }

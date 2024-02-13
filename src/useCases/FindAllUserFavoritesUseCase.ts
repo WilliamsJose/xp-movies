@@ -1,7 +1,7 @@
-import { FindAllUserFavoritesEnum } from '../enums/FindAllUserFavoritesEnum'
-import { IUserMovie } from '../domains/entities'
 import { IMovieRepository, IUserMovieRepository } from '../domains/repositories'
 import { IUseCase } from '../domains/useCases/IUseCase'
+import { IUseCaseResult } from '../domains/useCases/IUseCaseResult'
+import { UseCaseResponsesEnum } from '../enums/UseCaseResponsesEnum'
 
 export class FindAllUserFavoritesUseCase implements IUseCase {
   constructor(
@@ -9,15 +9,26 @@ export class FindAllUserFavoritesUseCase implements IUseCase {
     private moviesRepository: IMovieRepository
   ) {}
 
-  async execute(userId: number): Promise<IUserMovie[] | FindAllUserFavoritesEnum | undefined> {
+  async execute(userId: number): Promise<IUseCaseResult> {
     try {
-      if (!userId) return FindAllUserFavoritesEnum.InvalidParameters
+      if (!userId) {
+        return {
+          code: UseCaseResponsesEnum.InvalidParameters,
+          body: 'Missing param: userId.'
+        }
+      }
 
       const userMovies = await this.userMovieRepository.getByUserId(+userId)
 
-      return userMovies
+      return {
+        code: UseCaseResponsesEnum.Success,
+        body: { favorites: userMovies }
+      }
     } catch (error) {
-      return FindAllUserFavoritesEnum.InvalidUser
+      return {
+        code: UseCaseResponsesEnum.InvalidUser,
+        body: 'User not found on database.'
+      }
     }
   }
 }
