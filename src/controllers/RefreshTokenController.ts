@@ -1,11 +1,9 @@
 import { createResponseInternalServerError } from '../helpers/apiResponse'
 import { IController } from '../domains/controllers'
 import { IUseCase } from '../domains/useCases/IUseCase'
-import { Get, Route, Request, Header } from 'tsoa'
 import { IControllerResponse } from '../domains/controllers/IControllerResponse'
 import { mapResponseToHTTP } from '../utils/mapResponseToHTTP'
 
-@Route('token/refresh')
 export class RefreshTokenController implements IController {
   constructor(private refreshTokenUseCase: IUseCase) {}
 
@@ -17,8 +15,7 @@ export class RefreshTokenController implements IController {
    * This function takes a Refresh Token as input and generates a new Access Token.
    * It is used to refresh the authentication session without requiring the user to log in again.
    */
-  @Get()
-  async handle(@Header('refreshtoken') @Request() request: any): Promise<IControllerResponse> {
+  async handle(request: any): Promise<IControllerResponse> {
     const { refreshtoken: refreshToken } = request.headers
 
     try {
