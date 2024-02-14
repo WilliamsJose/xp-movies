@@ -1,3 +1,6 @@
 export * from './AddNewFavoriteController'
 export * from './AuthController'
 export * from './RefreshTokenController'
+export * from './RegisterController'
+export * from './FindAllUserFavoritesController'
+export * from './DeleteUserFavoriteController'
