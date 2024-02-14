@@ -1,4 +1,4 @@
-import { Post, Route, Security, Request, Body, Example, Header, Response } from 'tsoa'
+import { Post, Route, Security, Request, Body, Example, Header, Response, OperationId } from 'tsoa'
 
 interface IAddNewUserFavoriteRequestBody {
   imdbId: string
@@ -53,6 +53,7 @@ export class AddNewUserFavoriteController {
   @Example(exampleBody)
   @Response('400', 'Invalid Params')
   @Response('404', 'User not found')
+  @OperationId('handleAddNewUserFavoriteController')
   async handle(
     @Header('authorization') @Request() req: any,
     @Request() res: any,

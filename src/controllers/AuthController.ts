@@ -6,6 +6,13 @@ import { mapResponseToHTTP } from '../utils/mapResponseToHTTP'
 export class AuthController implements IController {
   constructor(private authUseCase: IUseCase) {}
 
+  /**
+   * Performs user login.
+   * @param {string} request - With the user email and password on body.
+   * @returns {string} - The newly generated Access Token and Refresh Token on header.
+   * @description
+   * This function performs login taking a email and password as input and generates a new Access Token and Refresh Token.
+   */
   async handle(request: any): Promise<any> {
     const { email, password } = request.body
 
