@@ -1,4 +1,4 @@
-import { Route, Request, Example, OperationId, Header, Post, Body } from 'tsoa'
+import { Route, Request, Example, OperationId, Post, Body } from 'tsoa'
 import jwt from 'jsonwebtoken'
 
 interface IRegisterRequestBody {
@@ -29,15 +29,15 @@ const exampleBody: IRegisterResponseBody = {
 export class RegisterController {
   /**
    *
-   * @summary
-   * @param req
-   * @returns
+   * @summary Create new user
+   * @param body user
+   * @returns new user created
    */
   @Post()
   @Example(exampleBody)
   @OperationId('handleRegisterController')
   async handle(
-    @Header('authorization') @Request() req: any,
+    @Request() req: any,
     @Request() res: any,
     @Body() reqBody: IRegisterRequestBody
   ): Promise<IRegisterResponseBody> {

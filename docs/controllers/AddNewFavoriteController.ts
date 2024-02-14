@@ -48,6 +48,11 @@ const exampleBody: IAddNewUserFavoriteResponseBody = {
 
 @Route('/user/favorites')
 export class AddNewUserFavoriteController {
+  /**
+   * Given a authorization token and body with movie or movieId, add the movie to the user favorite movies list
+   * @summary Add new favorite movie
+   * @param authorization token
+   */
   @Security('authorization')
   @Post()
   @Example(exampleBody)

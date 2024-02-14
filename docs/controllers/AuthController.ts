@@ -16,6 +16,12 @@ const exampleBody: IAuthResponseBody = {
 
 @Route('/login')
 export class AuthController {
+  /**
+   * Given an email and password, validate and return if user are logged in successfully
+   * @summary perform user login
+   * @param body with user email and password
+   * @returns an message login success or fail
+   */
   @Post()
   @Example(exampleBody)
   @Response('404', 'User not found')

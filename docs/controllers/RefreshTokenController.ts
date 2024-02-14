@@ -1,4 +1,4 @@
-import { Route, Request, Example, Response, OperationId, Get, Header } from 'tsoa'
+import { Route, Request, Example, Response, OperationId, Get, Header, Security } from 'tsoa'
 import jwt from 'jsonwebtoken'
 
 interface IRefreshTokenResponseBody {
@@ -12,13 +12,14 @@ const exampleBody: IRefreshTokenResponseBody = {
 @Route('token/refresh')
 export class RefreshTokenController {
   /**
-   * Given a Refresh Token generates one new Access Token (authorization)
+   * Given a Refresh Token, generates one new Access Token (authorization)
    * @summary Generate new Access Token
    * @param req Refresh Token
    * @returns New Access Token
    */
   @Get()
   @Example(exampleBody)
+  @Security('refreshtoken')
   @Response('400', 'Invalid Token')
   @OperationId('handleRefreshTokenController')
   async handle(@Header('refreshtoken') @Request() req: any, @Request() res: any): Promise<IRefreshTokenResponseBody> {

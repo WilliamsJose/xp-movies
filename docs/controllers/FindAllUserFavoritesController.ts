@@ -1,4 +1,4 @@
-import { Route, Request, Example, OperationId, Get, Header } from 'tsoa'
+import { Route, Request, Example, OperationId, Get, Header, Security } from 'tsoa'
 
 interface IFindAllUserFavoritesResponseBody {
   favorites: {
@@ -45,12 +45,12 @@ const exampleBody: IFindAllUserFavoritesResponseBody = {
 @Route('/user/favorites')
 export class FindAllUserFavoritesController {
   /**
-   *
-   * @summary
-   * @param req
-   * @returns
+   * Given a authorization token, find all user favorite movies
+   * @summary return all user favorite movies
+   * @param authorization
    */
   @Get()
+  @Security('authorization')
   @Example(exampleBody)
   @OperationId('handleFindAllUserFavoritesController')
   async handle(
