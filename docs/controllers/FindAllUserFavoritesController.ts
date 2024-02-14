@@ -46,7 +46,7 @@ const exampleBody: IFindAllUserFavoritesResponseBody = {
 export class FindAllUserFavoritesController {
   /**
    * Given a authorization token, find all user favorite movies
-   * @summary return all user favorite movies
+   * @summary Return all user favorite movies
    * @param authorization
    */
   @Get()

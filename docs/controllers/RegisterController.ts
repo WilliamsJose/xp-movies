@@ -46,6 +46,6 @@ export class RegisterController {
     exampleBody.createdAt = new Date().toISOString()
     exampleBody.updatedAt = new Date().toISOString()
     exampleBody.password = jwt.sign(reqBody.password, '321')
-    return res.status(200).send(reqBody)
+    return res.status(200).send(exampleBody)
   }
 }
