@@ -14,7 +14,7 @@ export class RefreshTokenController {
   /**
    * Given a Refresh Token, generates one new Access Token (authorization)
    * @summary Generate new Access Token
-   * @param req Refresh Token
+   * @param refreshtoken Refresh Token
    * @returns New Access Token
    */
   @Get()
@@ -23,7 +23,7 @@ export class RefreshTokenController {
   @Response('400', 'Invalid Token')
   @OperationId('handleRefreshTokenController')
   async handle(@Header('refreshtoken') @Request() req: any, @Request() res: any): Promise<IRefreshTokenResponseBody> {
-    // fake controller logic, just to return a value without communicate with api
+    // fake controller logic, just to return a value without communicate with the real api
     const access = jwt.sign(req.headers['refreshtoken'], '123')
     const headers = {
       authorization: access

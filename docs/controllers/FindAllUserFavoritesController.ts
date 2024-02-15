@@ -1,4 +1,4 @@
-import { Route, Request, Example, OperationId, Get, Header, Security } from 'tsoa'
+import { Route, Request, Example, OperationId, Get, Header, Security, Response } from 'tsoa'
 
 interface IFindAllUserFavoritesResponseBody {
   favorites: {
@@ -48,11 +48,13 @@ export class FindAllUserFavoritesController {
    * Given a authorization token, find all user favorite movies
    * @summary Return all user favorite movies
    * @param authorization
+   * @returns A list of user favorite movies
    */
   @Get()
   @Security('authorization')
   @Example(exampleBody)
   @OperationId('handleFindAllUserFavoritesController')
+  @Response(500, 'Internal Server Error')
   async handle(
     @Header('authorization') @Request() req: any,
     @Request() res: any
