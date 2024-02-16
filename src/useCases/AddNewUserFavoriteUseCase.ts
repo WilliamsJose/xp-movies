@@ -19,7 +19,7 @@ export class AddNewUserFavoriteUseCase implements IUseCase {
   ) {}
 
   async execute(userId: number, imdbId: string, categoriesIds: number[], title: string): Promise<IUseCaseResult> {
-    if (!userId || !imdbId || Array(categoriesIds).length < 1 || !title) {
+    if (!userId || !imdbId || categoriesIds.length < 1 || !title) {
       return {
         code: UseCaseResponsesEnum.InvalidParameters,
         body: 'Missing params: userId, imdbId, categoriesIds or title.'

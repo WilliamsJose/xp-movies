@@ -20,7 +20,7 @@ export class RefreshTokenUseCase implements IUseCase {
       const decodedUserToken: any = jwt.verify(refreshToken, process.env.REFRESH_SECRET || '')
 
       // token exists on database?
-      await this.userTokenRepository.getNewAccessToken(refreshToken)
+      await this.userTokenRepository.findRefreshToken(refreshToken)
 
       const newAccessToken = jwt.sign({ id: decodedUserToken.id }, process.env.ACCESS_SECRET || '', {
         expiresIn: process.env.JWT_ACCESS_EXPIRES_IN

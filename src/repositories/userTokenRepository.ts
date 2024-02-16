@@ -26,8 +26,8 @@ export class UserTokenRepository implements IUserTokenRepository {
     return refreshToken ?? undefined
   }
 
-  async getNewAccessToken(refreshToken: string): Promise<IUserToken | undefined> {
-    const accessToken = await this.repository.findOneBy({ refreshToken })
+  async findRefreshToken(refreshToken: string): Promise<IUserToken | undefined> {
+    const accessToken = await this.repository.findOneByOrFail({ refreshToken })
     return accessToken ?? undefined
   }
 }
