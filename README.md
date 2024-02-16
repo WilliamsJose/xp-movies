@@ -20,7 +20,7 @@ TODO:
 - [x] SOLID
 - [x] Clean code
 - [x] Clean architecture
-- [x] swagger docs
+- [x] Swagger docs
 - [x] Jest
   - [ ] Augment coverage
 - [ ] Redis cache
