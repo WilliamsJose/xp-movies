@@ -1,0 +1,597 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"IRegisterResponseBody": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"createdAt": {
+						"type": "string"
+					},
+					"updatedAt": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"createdAt",
+					"updatedAt",
+					"name",
+					"email",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IRegisterRequestBody": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"email",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IRefreshTokenResponseBody": {
+				"properties": {
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IFindAllUserFavoritesResponseBody": {
+				"properties": {
+					"favorites": {
+						"items": {
+							"properties": {
+								"movie": {
+									"properties": {
+										"title": {
+											"type": "string"
+										},
+										"updatedAt": {
+											"type": "string"
+										},
+										"createdAt": {
+											"type": "string"
+										},
+										"imdbId": {
+											"type": "string"
+										},
+										"id": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"title",
+										"updatedAt",
+										"createdAt",
+										"imdbId",
+										"id"
+									],
+									"type": "object"
+								},
+								"user": {
+									"properties": {
+										"email": {
+											"type": "string"
+										},
+										"name": {
+											"type": "string"
+										},
+										"id": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"email",
+										"name",
+										"id"
+									],
+									"type": "object"
+								},
+								"updatedAt": {
+									"type": "string"
+								},
+								"createdAt": {
+									"type": "string"
+								},
+								"id": {
+									"type": "number",
+									"format": "double"
+								}
+							},
+							"required": [
+								"movie",
+								"user",
+								"updatedAt",
+								"createdAt",
+								"id"
+							],
+							"type": "object"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"favorites"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IAuthResponseBody": {
+				"properties": {
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IAuthRequestBody": {
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"email",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IAddNewUserFavoriteResponseBody": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"createdAt": {
+						"type": "string"
+					},
+					"updatedAt": {
+						"type": "string"
+					},
+					"user": {
+						"properties": {
+							"updatedAt": {
+								"type": "string"
+							},
+							"createdAt": {
+								"type": "string"
+							},
+							"email": {
+								"type": "string"
+							},
+							"name": {
+								"type": "string"
+							},
+							"id": {
+								"type": "number",
+								"format": "double"
+							}
+						},
+						"required": [
+							"updatedAt",
+							"createdAt",
+							"email",
+							"name",
+							"id"
+						],
+						"type": "object"
+					},
+					"movie": {
+						"properties": {
+							"updatedAt": {
+								"type": "string"
+							},
+							"createdAt": {
+								"type": "string"
+							},
+							"title": {
+								"type": "string"
+							},
+							"imdbId": {
+								"type": "string"
+							},
+							"id": {
+								"type": "number",
+								"format": "double"
+							}
+						},
+						"required": [
+							"updatedAt",
+							"createdAt",
+							"title",
+							"imdbId",
+							"id"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"id",
+					"createdAt",
+					"updatedAt",
+					"user",
+					"movie"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IAddNewUserFavoriteRequestBody": {
+				"properties": {
+					"imdbId": {
+						"type": "string"
+					},
+					"categoriesIds": {
+						"items": {
+							"type": "number",
+							"format": "double"
+						},
+						"type": "array"
+					},
+					"title": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"imdbId",
+					"categoriesIds",
+					"title"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "xp-movies",
+		"version": "1.0.0",
+		"license": {
+			"name": "MIT"
+		},
+		"contact": {}
+	},
+	"paths": {
+		"/register": {
+			"post": {
+				"operationId": "handleRegisterController",
+				"responses": {
+					"200": {
+						"description": "new user created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IRegisterResponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"id": 33,
+											"createdAt": "2024-02-14T21:43:20.761Z",
+											"updatedAt": "2024-02-14T21:43:20.761Z",
+											"name": "luqinha",
+											"email": "luqinha@mail.com",
+											"password": "$2b$12$sLb6ajqLl79sePdBuh4SL.m9FKMdfXAEzSCcm1pFkyTyuDt2g/PLa"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"summary": "Create new user",
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IRegisterRequestBody"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/token/refresh": {
+			"get": {
+				"operationId": "handleRefreshTokenController",
+				"responses": {
+					"200": {
+						"description": "New Access Token",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IRefreshTokenResponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "New access token generated!"
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Token"
+					}
+				},
+				"description": "Given a Refresh Token, generates one new Access Token (authorization)",
+				"summary": "Generate new Access Token",
+				"security": [
+					{
+						"refreshtoken": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "refreshtoken",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/user/favorites": {
+			"get": {
+				"operationId": "handleFindAllUserFavoritesController",
+				"responses": {
+					"200": {
+						"description": "A list of user favorite movies",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IFindAllUserFavoritesResponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"favorites": [
+												{
+													"id": 54,
+													"createdAt": "2024-02-11T15:51:35.886Z",
+													"updatedAt": "2024-02-11T15:51:35.886Z",
+													"user": {
+														"id": 10,
+														"name": "luqinha",
+														"email": "luqinha@mail.com"
+													},
+													"movie": {
+														"id": 39,
+														"imdbId": "tt12344",
+														"createdAt": "2024-02-10T18:16:06.857Z",
+														"updatedAt": "2024-02-10T18:16:06.857Z",
+														"title": "FPS Baddest Player The Movie"
+													}
+												}
+											]
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				},
+				"description": "Given a authorization token, find all user favorite movies",
+				"summary": "Return all user favorite movies",
+				"security": [
+					{
+						"authorization": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "authorization",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "handleAddNewUserFavoriteController",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IAddNewUserFavoriteResponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"id": 1,
+											"createdAt": "2024-02-14T16:58:54.391Z",
+											"updatedAt": "2024-02-14T16:58:54.391Z",
+											"user": {
+												"id": 10,
+												"name": "Maria",
+												"email": "m.josefina@mail.com",
+												"createdAt": "2024-02-14T16:58:54.391Z",
+												"updatedAt": "2024-02-14T16:58:54.391Z"
+											},
+											"movie": {
+												"id": 32,
+												"imdbId": "tt123",
+												"title": "Super Mario World 2",
+												"createdAt": "2024-02-14T16:58:54.391Z",
+												"updatedAt": "2024-02-14T16:58:54.391Z"
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Params"
+					},
+					"404": {
+						"description": "User not found"
+					}
+				},
+				"description": "Given a authorization token and body with movie or movieId, add the movie to the user favorite movies list",
+				"summary": "Add new favorite movie",
+				"security": [
+					{
+						"authorization": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "authorization",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IAddNewUserFavoriteRequestBody"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/user/favorites/{userMovieId}": {
+			"delete": {
+				"operationId": "handleDeleteUserFavoriteController",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"description": "Given a authorization token and favorite id, delete the movie from user favorites",
+				"summary": "Delete favorite movie",
+				"security": [
+					{
+						"authorization": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "authorization",
+						"in": "header",
+						"name": "authorization",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/login": {
+			"post": {
+				"operationId": "handleAuthController",
+				"responses": {
+					"200": {
+						"description": "An message login success or fail",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IAuthResponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "User logged in successfully!"
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Credentials"
+					},
+					"404": {
+						"description": "User not found"
+					}
+				},
+				"description": "Given an email and password, validate and return if user are logged in successfully",
+				"summary": "Perform user login",
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IAuthRequestBody"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}
