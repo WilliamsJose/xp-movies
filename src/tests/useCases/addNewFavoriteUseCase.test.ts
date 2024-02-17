@@ -170,6 +170,50 @@ describe('AddNewUserFavoriteUseCase: testing all possible response', () => {
     )
   })
 
+  it('should return invalid cateogires if category provided is not on database', async () => {
+    const userRepositoryMock: IUserRepository = {
+      getById: jest.fn().mockResolvedValue({ id: 1, name: 'John', email: 'john@example.com' }),
+      getByEmail: jest.fn().mockRejectedValue(new Error('Function not implemented.')),
+      save: jest.fn().mockRejectedValue(new Error('Function not implemented.'))
+    }
+
+    const movieRepositoryMock: IMovieRepository = {
+      getByImdb: jest.fn().mockResolvedValue(undefined),
+      save: jest.fn().mockResolvedValue({ imdbId: '123', title: 'Movie' }),
+      getManyById: jest.fn().mockRejectedValue(new Error('Function not implemented.'))
+    }
+
+    const categoryRepositoryMock: ICategoryRepository = {
+      getManyByIds: jest.fn().mockResolvedValue([]),
+      getById: jest.fn().mockRejectedValue(new Error('Function not implemented.'))
+    }
+
+    const movieCategoryRepositoryMock: IMovieCategoryRepository = {
+      save: jest.fn().mockResolvedValue([{ movieId: 1, categoryId: 1 }]),
+      getById: jest.fn().mockRejectedValue(new Error('Function not implemented.'))
+    }
+
+    const userMovieRepositoryMock: IUserMovieRepository = {
+      save: jest.fn().mockResolvedValue({ userId: 1, movieId: 1 }),
+      getByUserId: jest.fn().mockRejectedValue(new Error('Function not implemented.')),
+      deleteByUserMovieId: jest.fn().mockRejectedValue(new Error('Function not implemented.'))
+    }
+
+    const addNewUserFavoriteUseCase = new AddNewUserFavoriteUseCase(
+      userRepositoryMock,
+      movieRepositoryMock,
+      categoryRepositoryMock,
+      movieCategoryRepositoryMock,
+      userMovieRepositoryMock
+    )
+
+    const result = await addNewUserFavoriteUseCase.execute(1, '123', [2], 'Movie')
+
+    expect(result.code).toBe(UseCaseResponsesEnum.InvalidCategories)
+    expect(result.body).toEqual('Invalid categories.')
+    expect(categoryRepositoryMock.getManyByIds).toHaveBeenCalledWith([2])
+  })
+
   // it('should not save a new user favorite movie with duplicate IMDB ID', async () => {
   //   const userRepositoryMock: IUserRepository = {
   //     getById: jest.fn().mockResolvedValue({ id: 1, name: 'John', email: 'john@example.com' }),
