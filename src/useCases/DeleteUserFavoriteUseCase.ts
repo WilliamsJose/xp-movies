@@ -3,7 +3,7 @@ import { IUseCase } from '../domains/useCases/IUseCase'
 import { IUseCaseResult } from '../domains/useCases/IUseCaseResult'
 import { UseCaseResponsesEnum } from '../enums/UseCaseResponsesEnum'
 
-export class deleteUserFavoriteUseCase implements IUseCase {
+export class DeleteUserFavoriteUseCase implements IUseCase {
   constructor(private userMovieRepository: IUserMovieRepository) {}
   async execute(userMovieId: number): Promise<IUseCaseResult> {
     if (!userMovieId) {

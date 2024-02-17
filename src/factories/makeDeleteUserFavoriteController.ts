@@ -1,7 +1,7 @@
 import { DeleteUserFavoriteController } from '../controllers'
 import { UserMovieRepository } from '../repositories'
-import { deleteUserFavoriteUseCase } from '../useCases/DeleteUserFavoriteUseCase'
+import { DeleteUserFavoriteUseCase } from '../useCases/DeleteUserFavoriteUseCase'
 
 export const makeDeleteUserFavoriteController = () => {
-  return new DeleteUserFavoriteController(new deleteUserFavoriteUseCase(new UserMovieRepository()))
+  return new DeleteUserFavoriteController(new DeleteUserFavoriteUseCase(new UserMovieRepository()))
 }
