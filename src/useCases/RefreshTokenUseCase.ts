@@ -17,13 +17,13 @@ export class RefreshTokenUseCase implements IUseCase {
       }
 
       // is token valid?
-      const decodedUserToken: any = jwt.verify(refreshToken, process.env.REFRESH_SECRET || '')
+      const decodedUserToken: any = jwt.verify(refreshToken, process.env.REFRESH_SECRET || '123')
 
       // token exists on database?
       await this.userTokenRepository.findRefreshToken(refreshToken)
 
-      const newAccessToken = jwt.sign({ id: decodedUserToken.id }, process.env.ACCESS_SECRET || '', {
-        expiresIn: process.env.JWT_ACCESS_EXPIRES_IN
+      const newAccessToken = jwt.sign({ id: decodedUserToken.id }, process.env.ACCESS_SECRET || '123', {
+        expiresIn: process.env.JWT_ACCESS_EXPIRES_IN || '60s'
       })
 
       return {

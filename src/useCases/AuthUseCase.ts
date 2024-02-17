@@ -36,11 +36,11 @@ export class AuthUseCase implements IUseCase {
     }
 
     const accessToken = jwt.sign({ id: userFound.id }, process.env.ACCESS_SECRET || '123', {
-      expiresIn: process.env.JWT_ACCESS_EXPIRES_IN || 10
+      expiresIn: process.env.JWT_ACCESS_EXPIRES_IN || '60s'
     })
 
     const refreshToken = jwt.sign({ id: userFound.id }, process.env.REFRESH_SECRET || '123', {
-      expiresIn: process.env.JWT_REFRESH_EXPIRES_IN || 10
+      expiresIn: process.env.JWT_REFRESH_EXPIRES_IN || '60s'
     })
 
     const refreshTokenFound = await this.userTokenRepository.getByUserId(userFound.id)
