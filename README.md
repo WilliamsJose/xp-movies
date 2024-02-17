@@ -12,7 +12,7 @@ Now can be found [here](https://williamsjose.github.io/xp-movies/).
 ---
 
 ## Coverage
-![Current Coverage](./current-coverage.jpeg)
+![Current Coverage](./current-coverage.webp)
 
 ---
 
