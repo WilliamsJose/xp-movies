@@ -13,6 +13,13 @@ export class DeleteUserFavoriteUseCase implements IUseCase {
       }
     }
 
+    if (userMovieId < 0) {
+      return {
+        code: UseCaseResponsesEnum.InvalidParameters,
+        body: 'Invalid param: userMovieId must not be negative.'
+      }
+    }
+
     const rowsAffected = await this.userMovieRepository.deleteByUserMovieId(userMovieId)
 
     return {
