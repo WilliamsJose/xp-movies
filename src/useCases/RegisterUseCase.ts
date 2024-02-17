@@ -26,19 +26,20 @@ export class RegisterUseCase implements IUseCase {
       }
     }
 
-    const encryptedPass = await bcrypt.hash(password, 12)
-
-    try {
-      const newUser = await this.userRepository.save(name, email, encryptedPass)
-      return {
-        code: UseCaseResponsesEnum.Success,
-        body: newUser
-      }
-    } catch (error) {
+    const alreadyExists = await this.userRepository.getByEmail(email)
+    if (alreadyExists) {
       return {
         code: UseCaseResponsesEnum.AlreadyRegistered,
         body: 'Email already registered!'
       }
+    }
+
+    const encryptedPass = await bcrypt.hash(password, 12)
+
+    const newUser = await this.userRepository.save(name, email, encryptedPass)
+    return {
+      code: UseCaseResponsesEnum.Success,
+      body: newUser
     }
   }
 }

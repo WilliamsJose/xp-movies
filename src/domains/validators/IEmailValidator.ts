@@ -1,3 +1,3 @@
 export interface IEmailValidator {
-  isValid(email: string): Promise<boolean>
+  isValid(email: string): boolean
 }
