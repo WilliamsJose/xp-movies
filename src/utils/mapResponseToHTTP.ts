@@ -1,3 +1,4 @@
+import { IControllerResponse } from '../domains/controllers'
 import { IUseCaseResult } from '../domains/useCases/IUseCaseResult'
 import { UseCaseResponsesEnum } from '../enums/UseCaseResponsesEnum'
 import {
@@ -8,7 +9,7 @@ import {
   createResponseUnauthorized
 } from '../helpers/apiResponse'
 
-export const mapResponseToHTTP = (response: IUseCaseResult): any => {
+export const mapResponseToHTTP = (response: IUseCaseResult): IControllerResponse => {
   const { code, body, headers } = response
 
   switch (code) {
