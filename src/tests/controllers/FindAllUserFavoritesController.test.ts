@@ -1,4 +1,5 @@
 import { FindAllUserFavoritesController } from '../../controllers'
+import { IUseCase } from '../../domains/useCases/IUseCase'
 import { UseCaseResponsesEnum } from '../../enums/UseCaseResponsesEnum'
 
 describe('FindAllUserFavoritesController: testing all responses', () => {
@@ -6,11 +7,11 @@ describe('FindAllUserFavoritesController: testing all responses', () => {
     const userId = '123'
     const request = { query: { userId } }
     const useCaseResult = { code: UseCaseResponsesEnum.Success, body: { favorites: [] }, headers: undefined }
-    const findAllUserFavoriteUseCaseMock = {
+    const findAllUserFavoriteUseCaseMock: IUseCase = {
       execute: jest.fn().mockResolvedValue(useCaseResult)
     }
-    const controller = new FindAllUserFavoritesController(findAllUserFavoriteUseCaseMock)
 
+    const controller = new FindAllUserFavoritesController(findAllUserFavoriteUseCaseMock)
     const result = await controller.handle(request)
 
     expect(findAllUserFavoriteUseCaseMock.execute).toHaveBeenCalledWith(userId)
@@ -21,11 +22,11 @@ describe('FindAllUserFavoritesController: testing all responses', () => {
     const userId = '789'
     const request = { query: { userId } }
     const error = new Error('Internal Server Error')
-    const findAllUserFavoriteUseCaseMock = {
+    const findAllUserFavoriteUseCaseMock: IUseCase = {
       execute: jest.fn().mockRejectedValue(error)
     }
-    const controller = new FindAllUserFavoritesController(findAllUserFavoriteUseCaseMock)
 
+    const controller = new FindAllUserFavoritesController(findAllUserFavoriteUseCaseMock)
     const result = await controller.handle(request)
 
     expect(findAllUserFavoriteUseCaseMock.execute).toHaveBeenCalledWith(userId)
