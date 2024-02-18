@@ -1,12 +1,12 @@
 import { createResponseInternalServerError } from '../helpers/apiResponse'
-import { IController } from '../domains/controllers'
+import { IController, IControllerResponse } from '../domains/controllers'
 import { IUseCase } from '../domains/useCases/IUseCase'
 import { mapResponseToHTTP } from '../utils/mapResponseToHTTP'
 
 export class FindAllUserFavoritesController implements IController {
   constructor(private findAllUserFavoriteUseCase: IUseCase) {}
 
-  async handle(request: any): Promise<any> {
+  async handle(request: any): Promise<IControllerResponse> {
     const { userId } = request.query
 
     try {
