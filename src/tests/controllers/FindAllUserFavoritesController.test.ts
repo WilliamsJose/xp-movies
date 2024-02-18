@@ -16,4 +16,19 @@ describe('FindAllUserFavoritesController: testing all responses', () => {
     expect(findAllUserFavoriteUseCaseMock.execute).toHaveBeenCalledWith(userId)
     expect(result).toEqual({ status: 200, headers: undefined, body: { favorites: [] } })
   })
+
+  it('should call execute and return internal server error http response', async () => {
+    const userId = '789'
+    const request = { query: { userId } }
+    const error = new Error('Internal Server Error')
+    const findAllUserFavoriteUseCaseMock = {
+      execute: jest.fn().mockRejectedValue(error)
+    }
+    const controller = new FindAllUserFavoritesController(findAllUserFavoriteUseCaseMock)
+
+    const result = await controller.handle(request)
+
+    expect(findAllUserFavoriteUseCaseMock.execute).toHaveBeenCalledWith(userId)
+    expect(result).toEqual({ status: 500, headers: undefined, body: error })
+  })
 })
