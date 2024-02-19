@@ -1,5 +1,5 @@
-import { RefreshTokenController } from '../../controllers'
-import { IUseCase } from '../../domains/useCases/IUseCase'
+import { RefreshTokenController } from '../../src/controllers'
+import { IUseCase } from '../../src/domains/useCases/IUseCase'
 
 describe('RefreshTokenController:', () => {
   it('should call execute with correct parameters', async () => {

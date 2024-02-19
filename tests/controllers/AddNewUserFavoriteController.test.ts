@@ -1,4 +1,4 @@
-import { AddNewUserFavoriteController } from '../../controllers'
+import { AddNewUserFavoriteController } from '../../src/controllers'
 
 describe('AddNewUserFavoriteController:', () => {
   it('should call execute with correct parameters', async () => {

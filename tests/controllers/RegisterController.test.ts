@@ -1,5 +1,5 @@
-import { RegisterController } from '../../controllers'
-import { IUseCase } from '../../domains/useCases/IUseCase'
+import { RegisterController } from '../../src/controllers'
+import { IUseCase } from '../../src/domains/useCases/IUseCase'
 
 describe('RegisterController:', () => {
   it('should call execute with correct parameters', async () => {

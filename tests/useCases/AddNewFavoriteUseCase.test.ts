@@ -4,9 +4,9 @@ import {
   IMovieRepository,
   IUserMovieRepository,
   IUserRepository
-} from '../../domains/repositories'
-import { AddNewUserFavoriteUseCase } from '../../useCases'
-import { UseCaseResponsesEnum } from '../../enums/UseCaseResponsesEnum'
+} from '../../src/domains/repositories'
+import { AddNewUserFavoriteUseCase } from '../../src/useCases'
+import { UseCaseResponsesEnum } from '../../src/enums/UseCaseResponsesEnum'
 
 describe('AddNewUserFavoriteUseCase: testing all possible response', () => {
   beforeEach(() => {

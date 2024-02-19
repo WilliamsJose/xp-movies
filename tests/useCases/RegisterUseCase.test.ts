@@ -1,9 +1,9 @@
-import { IUserRepository } from '../../domains/repositories'
-import { IEmailValidator } from '../../domains/validators/IEmailValidator'
-import { UseCaseResponsesEnum } from '../../enums/UseCaseResponsesEnum'
-import { RegisterUseCase } from '../../useCases'
+import { IUserRepository } from '../../src/domains/repositories'
+import { IEmailValidator } from '../../src/domains/validators/IEmailValidator'
+import { UseCaseResponsesEnum } from '../../src/enums/UseCaseResponsesEnum'
+import { RegisterUseCase } from '../../src/useCases'
 import bcrypt from 'bcrypt'
-import { EmailValidator } from '../../validators/EmailValidator'
+import { EmailValidator } from '../../src/validators/EmailValidator'
 
 describe('RegisterUseCase: testing all possible responses', () => {
   beforeEach(() => {

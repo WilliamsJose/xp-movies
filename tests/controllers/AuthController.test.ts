@@ -1,7 +1,7 @@
-import { AuthController } from '../../controllers'
-import { IUseCase } from '../../domains/useCases/IUseCase'
-import { HTTPStatusCode } from '../../enums'
-import { UseCaseResponsesEnum } from '../../enums/UseCaseResponsesEnum'
+import { AuthController } from '../../src/controllers'
+import { IUseCase } from '../../src/domains/useCases/IUseCase'
+import { HTTPStatusCode } from '../../src/enums'
+import { UseCaseResponsesEnum } from '../../src/enums/UseCaseResponsesEnum'
 
 describe('AuthController: testing all responses', () => {
   it('should perform user login successfully and return Access Token and Refresh Token on header', async () => {

@@ -1,6 +1,6 @@
-import { IUserRepository, IUserTokenRepository } from '../../domains/repositories'
-import { UseCaseResponsesEnum } from '../../enums/UseCaseResponsesEnum'
-import { AuthUseCase } from '../../useCases'
+import { IUserRepository, IUserTokenRepository } from '../../src/domains/repositories'
+import { UseCaseResponsesEnum } from '../../src/enums/UseCaseResponsesEnum'
+import { AuthUseCase } from '../../src/useCases'
 import bcrypt from 'bcrypt'
 
 const createUserRepositoryMock = (password: string) => {

@@ -1,6 +1,6 @@
-import { IUserTokenRepository } from '../../domains/repositories'
-import { UseCaseResponsesEnum } from '../../enums/UseCaseResponsesEnum'
-import { RefreshTokenUseCase } from '../../useCases'
+import { IUserTokenRepository } from '../../src/domains/repositories'
+import { UseCaseResponsesEnum } from '../../src/enums/UseCaseResponsesEnum'
+import { RefreshTokenUseCase } from '../../src/useCases'
 import 'dotenv/config'
 import jwt from 'jsonwebtoken'
 

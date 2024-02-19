@@ -1,6 +1,6 @@
-import { IUserMovieRepository } from '../../domains/repositories'
-import { UseCaseResponsesEnum } from '../../enums/UseCaseResponsesEnum'
-import { DeleteUserFavoriteUseCase } from '../../useCases'
+import { IUserMovieRepository } from '../../src/domains/repositories'
+import { UseCaseResponsesEnum } from '../../src/enums/UseCaseResponsesEnum'
+import { DeleteUserFavoriteUseCase } from '../../src/useCases'
 
 describe('DeleteUserFavoriteUseCase: testing all possible response', () => {
   beforeEach(() => {

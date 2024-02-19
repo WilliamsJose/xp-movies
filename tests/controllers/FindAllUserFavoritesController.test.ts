@@ -1,5 +1,5 @@
-import { FindAllUserFavoritesController } from '../../controllers'
-import { IUseCase } from '../../domains/useCases/IUseCase'
+import { FindAllUserFavoritesController } from '../../src/controllers'
+import { IUseCase } from '../../src/domains/useCases/IUseCase'
 
 describe('FindAllUserFavoritesController: testing all responses', () => {
   it('should call execute and return apropriate http response with no favorites', async () => {

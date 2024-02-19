@@ -1,6 +1,6 @@
-import { DeleteUserFavoriteController } from '../../controllers'
-import { IUseCase } from '../../domains/useCases/IUseCase'
-import { UseCaseResponsesEnum } from '../../enums/UseCaseResponsesEnum'
+import { DeleteUserFavoriteController } from '../../src/controllers'
+import { IUseCase } from '../../src/domains/useCases/IUseCase'
+import { UseCaseResponsesEnum } from '../../src/enums/UseCaseResponsesEnum'
 
 describe('DeleteUserFavoriteController: testing all responses', () => {
   it('should call execute and return apropriate http response', async () => {

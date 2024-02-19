@@ -1,6 +1,6 @@
-import { IMovieRepository, IUserMovieRepository } from '../../domains/repositories'
-import { FindAllUserFavoritesUseCase } from '../../useCases'
-import { UseCaseResponsesEnum } from '../../enums/UseCaseResponsesEnum'
+import { IMovieRepository, IUserMovieRepository } from '../../src/domains/repositories'
+import { FindAllUserFavoritesUseCase } from '../../src/useCases'
+import { UseCaseResponsesEnum } from '../../src/enums/UseCaseResponsesEnum'
 
 describe('FindAllUserFavoritesUseCase: testing all possible responses', () => {
   beforeEach(() => {
