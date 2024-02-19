@@ -1,7 +1,7 @@
 import { HTTPStatusCode } from '../enums'
 
 export const createResponseBadRequest = (body: any, headers?: any) => {
-  body = typeof body === 'string' ? { body } : body
+  body = typeof body === 'string' ? { message: body } : body
   return {
     status: HTTPStatusCode.BadRequest,
     headers,
@@ -10,7 +10,7 @@ export const createResponseBadRequest = (body: any, headers?: any) => {
 }
 
 export const createResponseConflict = (body: any, headers?: any) => {
-  body = typeof body === 'string' ? { body } : body
+  body = typeof body === 'string' ? { message: body } : body
   return {
     status: HTTPStatusCode.Conflict,
     headers,
@@ -19,7 +19,7 @@ export const createResponseConflict = (body: any, headers?: any) => {
 }
 
 export const createResponseCreated = (body: any, headers?: any) => {
-  body = typeof body === 'string' ? { body } : body
+  body = typeof body === 'string' ? { message: body } : body
   return {
     status: HTTPStatusCode.Created,
     headers,
@@ -35,7 +35,7 @@ export const createResponseNoContent = (headers?: any) => {
 }
 
 export const createResponseForbbiden = (body: any, headers?: any) => {
-  body = typeof body === 'string' ? { body } : body
+  body = typeof body === 'string' ? { message: body } : body
   return {
     status: HTTPStatusCode.Forbbiden,
     headers,
@@ -44,7 +44,7 @@ export const createResponseForbbiden = (body: any, headers?: any) => {
 }
 
 export const createResponseInternalServerError = (body: any, headers?: any) => {
-  body = typeof body === 'string' ? { body } : body
+  body = typeof body === 'string' ? { message: body } : body
   return {
     status: HTTPStatusCode.InternalServerError,
     headers,
@@ -53,7 +53,7 @@ export const createResponseInternalServerError = (body: any, headers?: any) => {
 }
 
 export const createResponseNotFound = (body: any, headers?: any) => {
-  body = typeof body === 'string' ? { body } : body
+  body = typeof body === 'string' ? { message: body } : body
   return {
     status: HTTPStatusCode.NotFound,
     headers,
@@ -62,7 +62,7 @@ export const createResponseNotFound = (body: any, headers?: any) => {
 }
 
 export const createResponseUnauthorized = (body: any, headers?: any) => {
-  body = typeof body === 'string' ? { body } : body
+  body = typeof body === 'string' ? { message: body } : body
   return {
     status: HTTPStatusCode.Unauthorized,
     headers,
