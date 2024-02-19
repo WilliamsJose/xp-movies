@@ -21,6 +21,22 @@ describe('mapResponseToHTTP', () => {
     expect(mapResult).toEqual(expectedResult)
   })
 
+  it('should return successful http response for db inserted', () => {
+    const useCaseResult: IUseCaseResult = {
+      code: UseCaseResponsesEnum.DBInserted,
+      headers: undefined,
+      body: 'OK'
+    }
+    const mapResult = mapResponseToHTTP(useCaseResult)
+
+    const expectedResult: IControllerResponse = {
+      body: { message: 'OK' },
+      headers: undefined,
+      status: HTTPStatusCode.OK
+    }
+    expect(mapResult).toEqual(expectedResult)
+  })
+
   it('should return successful http response with no content for db deleted', () => {
     const useCaseResult: IUseCaseResult = {
       code: UseCaseResponsesEnum.DBDeleted,
@@ -161,6 +177,22 @@ describe('mapResponseToHTTP', () => {
       body: { message: 'Invalid Token.' },
       headers: undefined,
       status: HTTPStatusCode.BadRequest
+    }
+    expect(mapResult).toEqual(expectedResult)
+  })
+
+  it('should return bad request http response if user not registered', () => {
+    const useCaseResult: IUseCaseResult = {
+      code: UseCaseResponsesEnum.UserNotRegistered,
+      headers: undefined,
+      body: { message: 'User not Registered.' }
+    }
+    const mapResult = mapResponseToHTTP(useCaseResult)
+
+    const expectedResult: IControllerResponse = {
+      body: { message: 'User not Registered.' },
+      headers: undefined,
+      status: HTTPStatusCode.Unauthorized
     }
     expect(mapResult).toEqual(expectedResult)
   })
