@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 window.onload = function() {
   //<editor-fold desc="Changeable Configuration Block">
 
