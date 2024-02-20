@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(cors())
 app.use(routes)
 app.use('/docs', swaggerUi.serve, async (_req: ExRequest, res: ExResponse) => {
-  return res.send(swaggerUi.generateHTML(await import('../dist/swagger.json')))
+  return res.send(swaggerUi.generateHTML(await import('./swagger.json')))
 })
 
 // eslint-disable-next-line no-console

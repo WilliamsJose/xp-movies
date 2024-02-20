@@ -14,7 +14,7 @@
     "build:app": "tsc",
     "build:docs": "tsoa spec-and-routes && tsc --project ./tsconfig.docs.json",
     "docs": "node dist/docs/app.js",
-    "app": "node dist/app.js",
+    "app": "node dist/app/app.js",
     "test:debug": "node --inspect node_modules/.bin/jest --watch -o --testPathPattern=tests/",
     "test:coverage": "jest --coverage"
   },
