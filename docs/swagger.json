@@ -448,7 +448,7 @@
 				"operationId": "handleAddNewUserFavoriteController",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "the new favorite added",
 						"content": {
 							"application/json": {
 								"schema": {
