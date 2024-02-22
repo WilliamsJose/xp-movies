@@ -8,9 +8,10 @@ export class DeleteUserFavoriteController implements IController {
 
   async handle(request: any): Promise<IControllerResponse> {
     const { userMovieId } = request.params
+    const { authorization: accessToken } = request.headers
 
     try {
-      const result = await this.deleteUserFavoriteUseCase.execute(userMovieId)
+      const result = await this.deleteUserFavoriteUseCase.execute(userMovieId, accessToken)
       return mapResponseToHTTP(result)
     } catch (error: any) {
       return createResponseInternalServerError(error)

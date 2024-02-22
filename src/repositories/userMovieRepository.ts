@@ -11,8 +11,8 @@ export class UserMovieRepository implements IUserMovieRepository {
     this.repository = AppDataSource.getRepository(UserMovie)
   }
 
-  async deleteByUserMovieId(id: number): Promise<DeleteResult | undefined> {
-    const deletedUserMovie = await this.repository.delete({ id })
+  async deleteByUserMovieId(id: number, userId: number): Promise<DeleteResult | undefined> {
+    const deletedUserMovie = await this.repository.delete({ id, user: { id: userId } })
     return deletedUserMovie ?? undefined
   }
 
