@@ -17,9 +17,9 @@ export class MovieCategoryRepository implements IMovieCategoryRepository {
   }
 
   async save(movie: IMovie, categories: ICategory[]): Promise<IMovieCategory[] | undefined> {
-    const saved: IMovieCategory[] = categories.map((category) => this.repository.create({ movie, category }))
+    const movieCategory: IMovieCategory[] = categories.map((category) => this.repository.create({ movie, category }))
 
-    await this.repository.save(saved)
+    const saved = await this.repository.save(movieCategory)
 
     return saved ?? undefined
   }
