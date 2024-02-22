@@ -11,6 +11,10 @@ export class CategoryRepository implements ICategoryRepository {
     this.repository = AppDataSource.getRepository(Category)
   }
 
+  setRepository(repo: Repository<ICategory>) {
+    this.repository = repo
+  }
+
   async getById(id: number): Promise<ICategory | undefined> {
     const category = await this.repository.findOneBy({ id })
     return category ?? undefined
