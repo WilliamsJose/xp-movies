@@ -1,13 +1,10 @@
-import { IMovieRepository, IUserMovieRepository } from '../domains/repositories'
+import { IUserMovieRepository } from '../domains/repositories'
 import { IUseCase } from '../domains/useCases/IUseCase'
 import { IUseCaseResult } from '../domains/useCases/IUseCaseResult'
 import { UseCaseResponsesEnum } from '../enums/UseCaseResponsesEnum'
 
 export class FindAllUserFavoritesUseCase implements IUseCase {
-  constructor(
-    private userMovieRepository: IUserMovieRepository,
-    private moviesRepository: IMovieRepository
-  ) {}
+  constructor(private userMovieRepository: IUserMovieRepository) {}
 
   async execute(userId: number): Promise<IUseCaseResult> {
     try {
@@ -18,6 +15,9 @@ export class FindAllUserFavoritesUseCase implements IUseCase {
         }
       }
 
+      // redis get cache here and return
+
+      // if redis error or no cache, call repo
       const userMovies = await this.userMovieRepository.getByUserId(+userId)
 
       return {
