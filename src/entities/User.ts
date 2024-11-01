@@ -15,16 +15,16 @@ export class User implements IUser {
   @PrimaryGeneratedColumn()
   id: number
 
-  @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({ name: 'created_at'})
   createdAt: Date
 
-  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP' })
+  @UpdateDateColumn({ name: 'updated_at'})
   updatedAt: Date
 
   @Column({ type: 'text' })
   name: string
 
-  @Column({ type: 'text', unique: true })
+  @Column({ type: 'varchar', length: 255, unique: true })
   email: string
 
   @Column()

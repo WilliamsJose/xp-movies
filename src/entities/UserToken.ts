@@ -15,10 +15,10 @@ export class UserToken implements IUserToken {
   @PrimaryGeneratedColumn()
   id: number
 
-  @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({ name: 'created_at'})
   createdAt: Date
 
-  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP' })
+  @UpdateDateColumn({ name: 'updated_at'})
   updatedAt: Date
 
   @Column({ name: 'refresh_token' })

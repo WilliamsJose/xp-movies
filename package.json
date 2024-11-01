@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "nodemon --exec ts-node src/app.ts",
     "migration:generate": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:generate ./src/migrations/default",
-    "migration:run": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:run",
-    "format": "prettier . --write",
+    "migration:run": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:run && npm run seed",
+    "format": "npx prettier . --write",
     "lint": "eslint . --fix",
     "quality": "npm run lint && npm run format",
     "prepare": "husky",
@@ -16,7 +16,8 @@
     "docs": "node dist/docs/app.js",
     "app": "node dist/app/app.js",
     "test:debug": "node --inspect node_modules/.bin/jest --watch -o --testPathPattern=tests/",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "seed": "ts-node seed.ts"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -25,6 +26,7 @@
     "email-validator": "^2.0.4",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.11.3",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.2.1",
     "swagger-ui-express": "^5.0.0",
